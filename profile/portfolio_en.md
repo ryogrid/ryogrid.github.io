@@ -68,7 +68,7 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     YougakuTube: A web service that aggregates and presents music videos of Billboard ranked songs from Youtube (Western music version of CDTube)
     
 
-### Foreign Journals
+### International Journals
 
 - **Ryo Kanbayashi**, Mitsuhisa Sato
     
