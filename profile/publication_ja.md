@@ -205,230 +205,125 @@ back to [Profile](https://ryogrid.net/profile/index.html)
 - [Live AAC audio streaming with ffmpeg.exe and live docode with MediaCodec class of Android (Xamarin)](https://qiita.com/ryo_grid/items/804fd435d58b8704ea9e)
     
 #### [Webカメラで表情認識してWebsocketでブラウザアプリ内のキャラを動かす【2018】](https://qiita.com/ryo_grid/items/29425eb80bae1049322d)
+　ローカルで動作させるWebアプリと連携させたかったので、既存のコードを参考にPythonによる顔認識プログラムをWebSocketサーバに仕立てて、Webアプリ内のLive2Dの美少女キャラを顔認識で動かした。  
+　また、同様の顔認識WebSocketサーバをUnityアプリとして作ってみた。  
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。  
+
+#### [BitcoinウォレットもどきをScalaで書いてみた 【2018】](https://qiita.com/ryo_grid/items/25e22ca4027a2e420d93)
+Scalaの勉強がてら書いてみたが、ネットワークに参加できたところで満足してやめてしまいました・・・
+    
+#### 各種手法を用いた音声データのノイズ除去（音声強調）の実装検討 【2018】
+WebRTCと組み合わせて用いたいと考え、JS実装を試みたが結局うまくいかなかった  
+- [Signal Subspace法（カーネルPCA）を使って音声データのノイズ除去（音声強調）をやってみた](https://qiita.com/ryo_grid/items/6ae473d42595f7a8ff1b)
+- [MMSE-STSA法の音声強調・ノイズ除去をJSにポーティングしたがあと一歩うまく動かない話](https://qiita.com/ryo_grid/items/7e31449ddef5ab5681f7)
+
+#### [Mastodon風マイクロブログホスティングサービス UZOMUZO 【2017-現在】](http://uzomuzo.herokuapp.com/)
+　Mastodon風マイクロブログホスティングサービス。UZOMUZOを利用することで、誰でも趣味や同郷の仲間などでおしゃべりできる専用のMastodon風チャットルーム(インスタンス)を作ることができる。WebフレームワークはRuby on Railsを利用。運用にはHerokuを利用。Scrum-Upプロジェクトの成果物。おおむね3名のメンバで開発を行っている。  
+
+#### [Scrum-Upプロジェクト 【2017-現在】](https://scrum-up.github.io/)
+　有志で集まってソフトウェアを開発しちゃおうプロジェクト。2017年8月に神林が立ち上げ。現在4名程度を中心にオンラインでコラボレートしながらプロダクト開発を進めている。  
+
+#### [kaomoji2vec【2017】](http://qiita.com/ryo_grid/items/0c18513ae42778248a9f)
+　ニコ動コメントコーパスをword2vecすることにより顔文字をベクトル表現で扱うことに成功した
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
+   
+#### [Twitterの感情分析結果とテクニカル指標群を用いた株価(ダウ平均)の上昇・下落予測 【2017-現在】](https://qiita.com/ryo_grid/items/5a5ecc602186a3381c87)
+　Twitterの感情分析結果（calmness:穏やかさを利用）とテクニカル指標群を用いた株価(ダウ平均)の上昇・下落予測を行い、終値の予測では70%の精度、始値の予測では65%の精度を得た。  
+　実装はPythonで行い、決定木による回帰を行うXgboostライブラリを利用した。  
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。  
+    
+#### [FXシステムトレーディングの検討 【2015-現在】](http://d.hatena.ne.jp/kanbayashi/archive?word=FX) 
+　古典的な移動平均線との関係を用いた手法、ニューラルネットワーク (RNN) を用いた手法、各種テクニカル指標を特徴量としたロジスティック回帰(xgboostを使用)などの手法などを実装。為替予測は不可能ではないが、スプレッドを含む手数料が存在した場合、安定して利益を上げることは難しいとの結論を得た。と思ったが、常勝できそうなアルゴが完成し、半月程度実運用を行う。その後、知人のアドバイスを受け、グリッドトレーディング戦略のプログラムを作成し一時運用した。    
+- [コード(python、MQL)](https://github.com/ryogrid/fx_systrade)
+    
+#### [Neuroevolution手法を用いた強化学習によるOpenAI Gymの二足歩行ロボ制御と車の山登り制御 【2017】](http://qiita.com/ryo_grid/items/af60750659d1d7ffeef9)
+　遺伝的アルゴリズムとニューラルネットワークを組み合わせたNeuroevolutioonの一手法であるNEAT(NewroEvolution with Augment Topologires)を用いて掲題の処理を行った。  
+　実装にはPythonのneatライブラリを利用した。  
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。  
+- [山登り](http://qiita.com/ryo_grid/items/336e4208c76d110fdf6e)
+- [コード](https://github.com/ryogrid/DQN_AI_gym)
+
+#### [Open AI Gymにおける深層強化学習(DQN)を用いた倒立振子と二足歩行ロボットのシミュレーション 【2017】](http://qiita.com/ryo_grid/items/94f3a95d1e8d2ccddd6a)
+　PythonでAIシミュレーションプラットフォームであるOpen AI Gymを利用し、DQN学習のシミュレーションを行った。  
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。  
+- [コード](https://github.com/ryogrid/DQN_AI_gym)
+
+#### [深層強化学習(DQN)によるオセロもどきAI 【2016】](http://qiita.com/ryo_grid/items/72e1b64050650be3504b#_reference-79c62cdb05727b0220d2)
+　PythonでディープラーニングのフレームワークChainerを利用して実現。オセロに関する知識（ヒューリスティクス）をまったく与えずに学習し動作する。人間との対戦も可。当初はChainerでディープラーニング部を実装していたが、TensorFlowで書き換えて、AWS EC2のGPUインスタンス(g2.xlarge)で学習の高速化を試してみたりもした。だいたい数倍から10倍程度の加速が行えたようであった。  
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。  
+- [コード](https://github.com/ryogrid/RL_reversi)
+
+#### [WebSocketを利用したポーカーのゲームサーバ (Python) 【2016】](http://qiita.com/ryo_grid/items/d472bcd078ec9acc20cc)
+　PythonでWebSocketを利用したブラウザで遊べるポーカー（テキサスホールデム）のゲームサーバを開発した。操作をコマンドベースで行い、またディーリングを人が行うという設計により非常に少ないコードで実装することができた。プレイ時はユーザ間でチャットをすることも可能。  
+- [コード](https://github.com/ryogrid/chat-holdem)
+  
+#### [為替における価格の変化を表現するArduino製ランプ 【2016】](http://qiita.com/ryo_grid/items/062eabe34924822a9588)
+　Arduinoを用いて為替変化を表現するランプを開発した。OANDAのREST APIを利用してリアルタイムに為替情報を取得し、一秒毎にランプを点灯させる。  
+- [コード](https://github.com/ryogrid/Arduino_learning/tree/master/usdjpy_lamp)
+- [動作している様子の動画](https://www.youtube.com/watch?v=LRH5X6kaR2E)
+
+#### [顔面偏差値スカウター 【2015-現在】](http://d.hatena.ne.jp/kanbayashi/20150917/p1)
+　芸能人の平均顔との類似度から人の顔面偏差値を求める手法を考案。Microsoft社のTwisornotというサービスを使う方法を記事にした。また、同手法をスマホアプリ化(Android)し公開。2015/11/16にリリースし、9ヶ月後の2016/8/11現在2万2千ダウンロード強。上記記事はGigazineをはじめとした各種ネット媒体でも取りあげられた。なお、アプリはiOS版も開発したが、人を格付けするというコンセプトが認めらないため審査を通らず公開には至らなかった。  
+- [コード(Android)](https://github.com/ryogrid/GanmenScouter_android)
+- [コード(iOS)](https://github.com/ryogrid/GanmenScouter)
+
+#### [キャチボ 【2015】](https://play.google.com/store/apps/details?id=com.dcatch)
+　スマホの加速度センサを用いて２台のスマホを用いて仮想的なキャッチボールを行うAndroidアプリ。フィジカルコンピューティングのproof of conceptとして開発。なお、iOS版アプリも開発したがApp Storeの機器を破壊する恐れがあるアプリは認めないというポリシによって審査が通らず公開できず。   
+- [コード(Android)](https://github.com/ryogrid/CatchBo_android)
+- [コード(iOS)](https://github.com/ryogrid/CatchBo_ios)
+
+#### [KDDCUP2015への挑戦 【2015】](https://www.facebook.com/shen.l.liang/posts/10204117354401022)
+　ニューラルネットワーク(階層パーセプトロン、Deep LearningやRNN等を試した)やxgboost(勾配ブースティングによるロジスティック回帰)を用いて、Webサービスのユーザ離脱予測を行った。最終的にはAUC 0.877で225位 (総参加者821名）。  
+- [コード(python、ruby、lua)](https://github.com/ryogrid/kddcup2015)
+
+#### [Twiterソーシャルグラフを題材としたコミュニティ抽出および可視化 【2010】](http://ryogrid.net/wiki/doku.php?id=projects:twitter%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%AB%E3%82%B0%E3%83%A9%E3%83%95%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E6%8A%BD%E5%87%BA)
+　2.8億エッジ規模のTwitterソーシャルグラフを題材にデータマイニングを行いコミュニティ抽出およびその可視化を行った。データマイニングを行うための前処理の処理量が膨大であったため、その効率化のためAmazon Elastic Map Reduceを用いた分散処理を実装した。  
+    
+#### [P2Pニコ動キャッシュ共有プロキシ 【2007】](http://d.hatena.ne.jp/kanbayashi/20071229/p1)
+　peer to peer (P2P) ネットワークを構築し、相互にニコニコ動画の動画データをキャッシングし、サーバ負荷軽減に貢献できないかという試み。実験レベルでのプロトタイプを実装した。NicoCache_nl に P2PSocketを利用したキャッシュ共有機能を追加することで実現。  
+    
+#### [Svengali 【2010】](http://d.hatena.ne.jp/kanbayashi/20100613/p1)
+　クラウド時代の分散マシン操作ライブラリ(Ruby言語向け)。従来シェルスクリプト等で記述していた処理がより簡潔で柔軟に記述できる。  
+  
+#### [TOFU-G](http://sourceforge.jp/projects/tofu/) (Tsukuba Open Framework for Using Grid technology) 【2004】
+　ボランティアコンピューティングのプロジェクトを簡便に運用可能なJavaフレームワーク  
+    
+#### [Collat'z anti exapmle@homeプロジェクト 【2003】](https://web.archive.org/web/20060831193703/http://www2.117.ne.jp/~mat/dcomp/complete.htm#collanti)
+　メルセンヌ素数を候補としてコラッツ算法の判例を探索するボランティアコンピューティングのプロジェクト。プロジェクトの運営を行い、サーバプログラムとクライアントプログラムを全て自作した。計算部分はC言語、その他の部分はVisual Basicで開発した。  
+    
+#### [ひらめいったー 【2007】](http://ryogrid.net/idea/top)
+　Twitterのbotの形態をとり、Twitterのリプライ機能を活用してアイデアを投稿してもらい集積・配信するWebサービス  
+    
+#### [Kikker 【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
+　ユーザパーソナライズドなニュースサイト。データマイニング(コサイン類似度による類似ドキュメント検索)を行いユーザに合わせたWebページをサジェストするWebサービス。学習機能を搭載しておりユーザがKikkerのページ経由で閲覧したWebページの情報からサジェストするWebページを最適化する。  
+  
+#### [はてブおせっかい 【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
+　ユーザパーソナライズドなニュースサイト。データマイニング(コラボレイティブフィルタ)を行いユーザに合わせたWebページをサジェストするWebサービス。  
+    
+#### [はてブまわりのひと 【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
+　はてなブックマークのお気に入り関係をソーシャルグラフの形で可視化するWebサービス。Java Applet製。  
+    
+#### [Kookle【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
+　はてなブックマークから収集されたブックマークページのタグ情報から自動生成するWebディレクトリサービス。Yahoo のWebディレクトリと同様のものをフォークソノミー的な方法で構築できないかという試み。  
+    
+#### [YougakuTube 【2006】](http://www.outdex.net/diary/archives/2006/12/yougakutubeyoutube.shtml)
+　ビルボードにランクした曲のミュージックビデオをYoutubeからアグリゲートして提示するウェブサービス (CDTubeの洋楽版)  
     
-    ```
-      ローカルで動作させるWebアプリと連携させたかったので、既存のコードを参考にPythonによる顔認識プログラムをWebSocketサーバに仕立てて、Webアプリ内のLive2Dの美少女キャラを顔認識で動かした。
-      また、同様の顔認識WebSocketサーバをUnityアプリとして作ってみた。
-      なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    ```
+#### [何してtter 【2007】](http://d.hatena.ne.jp/kanbayashi/20070422/p1)
+　TwitterのユーザIDを指定すると、発言の中に含まれる動詞・名詞を抽出し、過去にどのような行動をしていたか可視化するWebサービス。  
+- [紹介サイト](http://twitternavi.net/2007/05/tter.html)
     
-- [BitcoinウォレットもどきをScalaで書いてみた 【2018】](https://qiita.com/ryo_grid/items/25e22ca4027a2e420d93)
+#### [もひかんチャット 【2007】](http://d.hatena.ne.jp/kanbayashi/20070303/p1)
+　Webベースのリアルタイムチャットサービス。Webページについての議論や意見交換を目的としており、Webページ毎にチャットルームを作成することができる。オープンソースのチャットソフトウェアである KOCHA をベースに開発。  
     
-    ```
-      Scalaの勉強がてら書いてみたが、ネットワークに参加できたところで満足してやめてしまいました・・・
-    ```
+#### [Fault VM 【2007】](http://www.ipsj.or.jp/award/9faeag0000004emc-att/3P_1.pdf)
+　ハードウェア故障を擬似的に発生可能な Virtual Machine (仮想マシン)。フォルトインジェクタと呼ばれるソフトウェアの一種。ソフトウェアの耐故障性の評価を目的にプロトタイプを開発。プロトタイプではメモリ故障の発生に対応した。Xenをベースに開発。  
     
-- 各種手法を用いた音声データのノイズ除去（音声強調）の実装検討 【2018】
-    
-    WebRTCと組み合わせて用いたいと考え、JS実装を試みたが結局うまくいかなかった
-    
-    - [Signal Subspace法（カーネルPCA）を使って音声データのノイズ除去（音声強調）をやってみた](https://qiita.com/ryo_grid/items/6ae473d42595f7a8ff1b)
-    - [MMSE-STSA法の音声強調・ノイズ除去をJSにポーティングしたがあと一歩うまく動かない話](https://qiita.com/ryo_grid/items/7e31449ddef5ab5681f7)
-- [Mastodon風マイクロブログホスティングサービス UZOMUZO 【2017-現在】](http://uzomuzo.herokuapp.com/)
-    
-    ```
-      Mastodon風マイクロブログホスティングサービス。UZOMUZOを利用することで、誰でも趣味や同郷の仲間などでおしゃべりできる専用のMastodon風チャットルーム(インスタンス)を作ることができる。WebフレームワークはRuby on Railsを利用。運用にはHerokuを利用。Scrum-Upプロジェクトの成果物。おおむね3名のメンバで開発を行っている。
-    ```
-    
-- [Scrum-Upプロジェクト 【2017-現在】](https://scrum-up.github.io/)
-    
-    ```
-      有志で集まってソフトウェアを開発しちゃおうプロジェクト。2017年8月に神林が立ち上げ。現在4名程度を中心にオンラインでコラボレートしながらプロダクト開発を進めている。
-    
-    ```
-    
-- [kaomoji2vec【2017】](http://qiita.com/ryo_grid/items/0c18513ae42778248a9f)
-    
-    ```
-      ニコ動コメントコーパスをword2vecすることにより顔文字をベクトル表現で扱うことに成功した
-      なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    ```
-    
-- [Twitterの感情分析結果とテクニカル指標群を用いた株価(ダウ平均)の上昇・下落予測 【2017-現在】](https://qiita.com/ryo_grid/items/5a5ecc602186a3381c87)
-    
-    ```
-      Twitterの感情分析結果（calmness:穏やかさを利用）とテクニカル指標群を用いた株価(ダウ平均)の上昇・下落予測を行い、終値の予測では70%の精度、始値の予測では65%の精度を得た。
-      実装はPythonで行い、決定木による回帰を行うXgboostライブラリを利用した。
-      なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    ```
-    
-- [FXシステムトレーディングの検討 【2015-現在】](http://d.hatena.ne.jp/kanbayashi/archive?word=FX)
-    
-    古典的な移動平均線との関係を用いた手法、ニューラルネットワーク (RNN) を用いた手法、各種テクニカル指標を特徴量としたロジスティック回帰(xgboostを使用)などの手法などを実装。為替予測は不可能ではないが、スプレッドを含む手数料が存在した場合、安定して利益を上げることは難しいとの結論を得た。と思ったが、常勝できそうなアルゴが完成し、半月程度実運用を行う。その後、知人のアドバイスを受け、グリッドトレーディング戦略のプログラムを作成し一時運用した。
-    
-    [コード(python、MQL)](https://github.com/ryogrid/fx_systrade)
-    
-- [Neuroevolution手法を用いた強化学習によるOpenAI Gymの二足歩行ロボ制御と車の
-山登り制御 【2017】](http://qiita.com/ryo_grid/items/af60750659d1d7ffeef9)
-    
-    ```
-      遺伝的アルゴリズムとニューラルネットワークを組み合わせたNeuroevolutioonの一手法であるNEAT(NewroEvolution with Augment Topologires)を用いて掲題の処理を行った。
-      実装にはPythonのneatライブラリを利用した。
-      なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    ```
-    
-    - [山登り](http://qiita.com/ryo_grid/items/336e4208c76d110fdf6e)
-    - [コード](https://github.com/ryogrid/DQN_AI_gym)
-- [Open AI Gymにおける深層強化学習(DQN)を用いた倒立振子と二足歩行ロボットのシミュレーション 【2017】](http://qiita.com/ryo_grid/items/94f3a95d1e8d2ccddd6a)
-    
-    ```
-    PythonでAIシミュレーションプラットフォームであるOpen AI Gymを利用し、DQN学習のシミュレーションを行った。
-    　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    
-    ```
-    
-    - [コード](https://github.com/ryogrid/DQN_AI_gym)
-- [深層強化学習(DQN)によるオセロもどきAI 【2016】](http://qiita.com/ryo_grid/items/72e1b64050650be3504b#_reference-79c62cdb05727b0220d2)
-    
-    ```
-    PythonでディープラーニングのフレームワークChainerを利用して実現。オセロに関する知識（ヒューリスティクス）をまったく与えずに学習し動作する。人間との対戦も可。当初はChainerでディープラーニング部を実装していたが、TensorFlowで書き換えて、AWS EC2のGPUインスタンス(g2.xlarge)で学習の高速化を試してみたりもした。だいたい数倍から10倍程度の加速が行えたようであった。
-    　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    
-    ```
-    
-    - [コード](https://github.com/ryogrid/RL_reversi)
-- [WebSocketを利用したポーカーのゲームサーバ (Python) 【2016】](http://qiita.com/ryo_grid/items/d472bcd078ec9acc20cc)
-    
-    ```
-    PythonでWebSocketを利用したブラウザで遊べるポーカー（テキサスホールデム）のゲームサーバを開発した。操作をコマンドベースで行い、またディーリングを人が行うという設計により非常に少ないコードで実装することができた。プレイ時はユーザ間でチャットをすることも可能。
-    ```
-    
-    - [コード](https://github.com/ryogrid/chat-holdem)
-- [為替における価格の変化を表現するArduino製ランプ 【2016】](http://qiita.com/ryo_grid/items/062eabe34924822a9588)
-    
-    ```
-    Arduinoを用いて為替変化を表現するランプを開発した。OANDAのREST APIを利用してリアルタイムに為替情報を取得し、一秒毎にランプを点灯させる。
-    
-    ```
-    
-    - [コード](https://github.com/ryogrid/Arduino_learning/tree/master/usdjpy_lamp)
-    - [動作している様子の動画](https://www.youtube.com/watch?v=LRH5X6kaR2E)
-- [顔面偏差値スカウター 【2015-現在】](http://d.hatena.ne.jp/kanbayashi/20150917/p1)
-    
-    ```
-    芸能人の平均顔との類似度から人の顔面偏差値を求める手法を考案。Microsoft社のTwisornotというサービスを使う方法を記事にした。また、同手法をスマホアプリ化(Android)し公開。2015/11/16にリリースし、9ヶ月後の2016/8/11現在2万2千ダウンロード強。上記記事はGigazineをはじめとした各種ネット媒体でも取りあげられた。なお、アプリはiOS版も開発したが、人を格付けするというコンセプトが認めらないため審査を通らず公開には至らなかった。
-    ```
-    
-    - [コード(Android)](https://github.com/ryogrid/GanmenScouter_android)
-    - [コード(iOS)](https://github.com/ryogrid/GanmenScouter)
-- [キャチボ 【2015】](https://play.google.com/store/apps/details?id=com.dcatch)
-    
-    ```
-    スマホの加速度センサを用いて２台のスマホを用いて仮想的なキャッチボールを行うAndroidアプリ。フィジカルコンピューティングのproof of conceptとして開発。なお、iOS版アプリも開発したがApp Storeの機器を破壊する恐れがあるアプリは認めないというポリシによって審査が通らず公開できず。
-    ```
-    
-    - [コード(Android)](https://github.com/ryogrid/CatchBo_android)
-    - [コード(iOS)](https://github.com/ryogrid/CatchBo_ios)
-- [KDDCUP2015への挑戦 【2015】](https://www.facebook.com/shen.l.liang/posts/10204117354401022)
-    
-    ```
-    ニューラルネットワーク(階層パーセプトロン、Deep LearningやRNN等を試した)やxgboost(勾配ブースティングによるロジスティック回帰)を用いて、Webサービスのユーザ離脱予測を行った。最終的にはAUC 0.877で225位 (総参加者821名）。
-    ```
-    
-    - [コード(python、ruby、lua)](https://github.com/ryogrid/kddcup2015)
-- [Twiterソーシャルグラフを題材としたコミュニティ抽出および可視化 【2010】](http://ryogrid.net/wiki/doku.php?id=projects:twitter%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%AB%E3%82%B0%E3%83%A9%E3%83%95%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E6%8A%BD%E5%87%BA)
-    
-    ```
-    2.8億エッジ規模のTwitterソーシャルグラフを題材にデータマイニングを行いコミュニティ抽出およびその可視化を行った。データマイニングを行うための前処理の処理量が膨大であったため、その効率化のためAmazon Elastic Map Reduceを用いた分散処理を実装した。
-    ```
-    
-- [P2Pニコ動キャッシュ共有プロキシ 【2007】](http://d.hatena.ne.jp/kanbayashi/20071229/p1)
-    
-    ```
-    peer to peer (P2P) ネットワークを構築し、相互にニコニコ動画の動画データをキャッシングし、サーバ負荷軽減に貢献できないかという試み。実験レベルでのプロトタイプを実装した。NicoCache_nl に P2PSocketを利用したキャッシュ共有機能を追加することで実現。
-    ```
-    
-- [Svengali 【2010】](http://d.hatena.ne.jp/kanbayashi/20100613/p1)
-    
-    ```
-    クラウド時代の分散マシン操作ライブラリ(Ruby言語向け)。従来シェルスクリプト等で記述していた処理がより簡潔で柔軟に記述できる。
-    ```
-    
-- [TOFU-G](http://sourceforge.jp/projects/tofu/) (Tsukuba Open Framework for Using Grid technology) 【2004】
-    
-    ```
-    ボランティアコンピューティングのプロジェクトを簡便に運用可能なJavaフレームワーク
-    ```
-    
-- [Collat'z anti exapmle@homeプロジェクト 【2003】](https://web.archive.org/web/20060831193703/http://www2.117.ne.jp/~mat/dcomp/complete.htm#collanti)
-    
-    ```
-    メルセンヌ素数を候補としてコラッツ算法の判例を探索するボランティアコンピューティングのプロジェクト。プロジェクトの運営を行い、サーバプログラムとクライアントプログラムを全て自作した。計算部分はC言語、その他の部分はVisual Basicで開発した。
-    ```
-    
-- [ひらめいったー 【2007】](http://ryogrid.net/idea/top)
-    
-    ```
-    Twitterのbotの形態をとり、Twitterのリプライ機能を活用してアイデアを投稿してもらい集積・配信するWebサービス
-    
-    ```
-    
-- [Kikker 【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
-    
-    ```
-    ユーザパーソナライズドなニュースサイト。データマイニング(コサイン類似度による類似ドキュメント検索)を行いユーザに合わせたWebページをサジェストするWebサービス。学習機能を搭載しておりユーザがKikkerのページ経由で閲覧したWebページの情報からサジェストするWebページを最適化する。
-    ```
-    
-- [はてブおせっかい 【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
-    
-    ```
-    ユーザパーソナライズドなニュースサイト。データマイニング(コラボレイティブフィルタ)を行いユーザに合わせたWebページをサジェストするWebサービス。
-    ```
-    
-- [はてブまわりのひと 【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
-    
-    ```
-    はてなブックマークのお気に入り関係をソーシャルグラフの形で可視化するWebサービス。Java Applet製。
-    ```
-    
-- [Kookle【2006】](http://www.slideshare.net/rawwell/sbm-presentation)
-    
-    ```
-    はてなブックマークから収集されたブックマークページのタグ情報から自動生成するWebディレクトリサービス。Yahoo のWebディレクトリと同様のものをフォークソノミー的な方法で構築できないかという試み。
-    
-    ```
-    
-- [YougakuTube 【2006】](http://www.outdex.net/diary/archives/2006/12/yougakutubeyoutube.shtml)
-    
-    ```
-    ビルボードにランクした曲のミュージックビデオをYoutubeからアグリゲートして提示するウェブサービス (CDTubeの洋楽版)
-    ```
-    
-- [何してtter 【2007】](http://d.hatena.ne.jp/kanbayashi/20070422/p1)
-    
-    ```
-    TwitterのユーザIDを指定すると、発言の中に含まれる動詞・名詞を抽出し、過去にどのような行動をしていたか可視化するWebサービス。
-    ```
-    
-    [紹介サイト](http://twitternavi.net/2007/05/tter.html)
-    
-- [もひかんチャット 【2007】](http://d.hatena.ne.jp/kanbayashi/20070303/p1)
-    
-    ```
-    Webベースのリアルタイムチャットサービス。Webページについての議論や意見交換を目的としており、Webページ毎にチャットルームを作成することができる。オープンソースのチャットソフトウェアである KOCHA をベースに開発。
-    
-    ```
-    
-- [Fault VM 【2007】](http://www.ipsj.or.jp/award/9faeag0000004emc-att/3P_1.pdf)
-    
-    ```
-    ハードウェア故障を擬似的に発生可能な Virtual Machine (仮想マシン)。フォルトインジェクタと呼ばれるソフトウェアの一種。ソフトウェアの耐故障性の評価を目的にプロトタイプを開発。プロトタイプではメモリ故障の発生に対応した。Xenをベースに開発。
-    
-    ```
-    
-- [SW-Agent 【2008-2010】](http://scholar.google.co.jp/scholar?cluster=6632496016795193268&hl=ja&as_sdt=0,5&as_vis=1)
-    
-    ```
-    オープンなセンサのデータを利用したWeb環境を目指したコンセプトであるセンシングWebを実現するための基盤ソフトウェアを開発した。ユーザはセンサ直近にデータ処理のためのプログラムを遠隔配置することができる (センサ直近でプライバシ情報を除去し手元に転送する)。ptrace を利用したシステムコールエミュレーションによりサンドボックスの構成、仮想デバイスを実現した。
-    ```
-    
-- [D-Cloud 【2009】](http://ryogrid.net/~ryo/dist/kanbayashi_master_thesis.pdf)
-    
-    ```
-    大規模テストファームであるD-Cloud を開発した。D-Cloudは、オープンソースのクラウド構築ソフトウェアであるEucalyptus をベースとする。ユーザは、D-Cloud が提供するテスト環境構築・検証作業の自動化と大規模な計算資源により、大規模な分散システムのテストをその複雑性に煩わされることなく行なうことができる。これにより，D-Cloud はソフトウェア開発におけるテストプロセスを加速する。分散システムのソフトウェアテストにおけるシステム構築・テスト実行支援のためXML での記述と、振る舞いを柔軟に記述可能なRuby言語を組み合わせた記述形式により、テストを直感的かつ柔軟に定義し実行できる手段 (= クラウド環境上への試験環境自動構築ツール、分散環境でのテストシナリオ実行ツール) を提供する。
-    
-    ```
-    
+#### [SW-Agent 【2008-2010】](http://scholar.google.co.jp/scholar?cluster=6632496016795193268&hl=ja&as_sdt=0,5&as_vis=1)
+　オープンなセンサのデータを利用したWeb環境を目指したコンセプトであるセンシングWebを実現するための基盤ソフトウェアを開発した。ユーザはセンサ直近にデータ処理のためのプログラムを遠隔配置することができる (センサ直近でプライバシ情報を除去し手元に転送する)。ptrace を利用したシステムコールエミュレーションによりサンドボックスの構成、仮想デバイスを実現した。  
+
+#### [D-Cloud 【2009】](http://ryogrid.net/~ryo/dist/kanbayashi_master_thesis.pdf)
+　大規模テストファームであるD-Cloud を開発した。D-Cloudは、オープンソースのクラウド構築ソフトウェアであるEucalyptus をベースとする。ユーザは、D-Cloud が提供するテスト環境構築・検証作業の自動化と大規模な計算資源により、大規模な分散システムのテストをその複雑性に煩わされることなく行なうことができる。これにより，D-Cloud はソフトウェア開発におけるテストプロセスを加速する。分散システムのソフトウェアテストにおけるシステム構築・テスト実行支援のためXML での記述と、振る舞いを柔軟に記述可能なRuby言語を組み合わせた記述形式により、テストを直感的かつ柔軟に定義し実行できる手段 (= クラウド環境上への試験環境自動構築ツール、分散環境でのテストシナリオ実行ツール) を提供する。  
 
 ### 賞罰
 
