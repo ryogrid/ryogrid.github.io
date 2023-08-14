@@ -1,3 +1,7 @@
+Japanese/ **[English](https://ryogrid.net/profile/publication_en.html)**
+ 
+
+    
 back to [Profile](https://ryogrid.net/profile/index.html)
 
 - Table of Content
