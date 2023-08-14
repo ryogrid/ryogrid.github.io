@@ -162,69 +162,49 @@ back to [Profile](https://ryogrid.net/profile/index.html)
 - [githubリポジトリ](https://github.com/ryogrid/fx_systrade/tree/thesis-based-dqn-trade-ryogird-special-qiita-2006)
 
 #### [コンシューマ向け脳波センシングヘッドセットでの意思伝達の試み【2020】](https://qiita.com/ryo_grid/items/6e6028b02004455a48ff)
+　コンシューマ向け製品レベルの脳波ヘッドセット（2万円程度）でも意思伝達が可能であるか、適宜論文などを参照し試みてみた。  
+　結果としては、参照した論文に記述された形での実現には失敗したが、不可能ではなさそうという結論であった。  
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。  
+- [githubリポジトリ](https://github.com/ryogrid/MindWaveSoundOddballExperiment)
+
+#### [Unityでの2D、3Dゲームの開発【2019】](https://unityroom.com/users/lx7jtf3gvrybpua90swk)
+　なんとなくコンピュータゲームというソフトウェアがどのような構成で作られているのか理解したいと思い立ち、「砦の攻防」という2Dレトロゲームのオマージュと、「PONG」の3Dバージョンを作ってみた。
+- [砦の攻防モドキ ryo_gridスペシャル](https://unityroom.com/games/toride_modoki)
+- [PONG風 3D壁打ち](https://unityroom.com/games/3dpongmodoki)
+
+#### [Over-Nat-Lib: 異なるNAT内のPC間でP2P通信をしてファイル転送したり、パイプをつないだりできるツール及びライブラリ【2019】](https://qiita.com/ryo_grid/items/651486649f116700bdae)
+　aiortcライブラリを用いてUDPホールパンチングを行いNAT超えしたうえでP2PでのSCTP通信路を確立する（aiortcが持つ、WebRTCのデータチャネル確立の機能を利用）。  
+　実装にはPythonを用いた。  
+　pipモジュール（onatlib）として配布しており同梱のサーバを2者がローカルで起動することで通信路は確立・維持され、その通信路を使いまわし、同梱のツールを用いたファイル転送やパイプ転送が可能。  
+　さらに、ローカルで起動したサーバが通信用にlistenしているポートは任意の通信が可能であり、同梱のツール以外でも確立された通信路でソケット通信を行うことが可能。  
+　WebRTCで異なるNAT内にいる二者が通信するためには、2者の情報を仲介するシグナリングサーバとSTUNサーバが必要であるが、前者は自身のサーバでホストし、後者はGoogleが提供しているものを利用している（aiortcにハードコードされている）。  
+　ライブラリと銘打ったもののツールがメインになってしまっているが、ローカルサーバを用いた他方との通信を簡易に行うためのpython向けのユーティリティーライブラリも提供している。  
+　同ライブラリを用いることで、ローカルサーバの存在を意識せずにソケット通信が可能である。  
+　Windowsプラットフォーム向けにはPython環境無しで利用できるよう、githubリポジトリにてexeファイル形式にパッケージングしたものも配布している(releaseのページを参照のこと)。  
+　なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。 
+ 
+- [Introduction of Over-NAT-Lib on English](https://qiita.com/ryo_grid/items/4ce5d45454887500e9c8)  
+- [githubリポジトリ](https://github.com/ryogrid/Over-NAT-Lib)
+
+#### [Python製WebRTC ライブラリ aiortc のデータチャネルを介したファイル転送(P2P直接通信)を行うサンプルプログラムを動かしてみる【2019】](https://qiita.com/ryo_grid/items/74d2310aab3ed4f60584)
+　UDPホールパンチングを行いNAT超えしたうえでP2PでのSCTP通信路を確立する。  
+　現在はaiortcを利用したデータ転送（ファイル、パイプ）プログラムを設計し実装に着手している。  
+　共用シグナリングサーバを独自にホストし、ユーザはPython環境無しに、配布するクライアントソフトウェアを使うだけでOver NATでのファイルや、パイプ経由でのデータ転送(netcatを想像いただきたい)を行えるようにする。  
+-  [Windowsでインストールおよび利用が可能なように修正を加えた aiortc の独自fork](https://github.com/ryogrid/aiortc-dc)
     
-    ```
-        コンシューマ向け製品レベルの脳波ヘッドセット（2万円程度）でも意思伝達が可能であるか、適宜論文などを参照し試みてみた。
+#### [モバイル回線でもパケ死しないような超低帯域のWindows操作用 Androidリモートデスクトップアプリの開発【2018-現在】](https://github.com/ryogrid/RemoteDesktopOneWindowForNovelGrame)
+　特定の用途であればFPSを極端に落とし(1FPS程度)、音声品質も落としてデータ通信量を減らしてもよいはずであるが、そのような要件を満たすソフトウェアが見当たらなかったため、開発している。  
+　サーバ、Androidアプリ共にC#で開発しており、Android側はXamarinフレームワークを利用している。  
+　メディアデータのライブエンコーディング・デコーディングについては、インターネットにもほとんど情報が無く、苦戦しつつ実装し、H264による連続画像の圧縮（差分圧縮ができるため低FPSの画像配信でも有用）、Opusでの音声圧縮に対応(AACでの実装を最初に試したが処理レイテンシが大きすぎてライブ配信では使い物にならなかった)。  
+　通信量は画像の差分(例えば、PC画面の表示内容に変化がなければ転送量は極めて小さくなる)によって大きく変化するが、音声が400Byte/s程度、(解像度が1920x1080のPCで、1FPSでスクリーンキャプチャを転送した場合で)画像がほぼゼロから約160KByte/s で変動するというレベルまで落とすことができた。  
+　なお、画像データのMaxは全てが書き換わった場合のMaxであるので、ノベルゲームなどのプレイを想定した場合、平均で40KByte/s もあれば十分ではないかと考えている。  
+　スマホアプリ側からの、タップ、ロングタップ、ドラッグによるマウス操作も実装済み。  
+　また、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。  
+　以下はノウハウ共有のために書いた技術記事。  
+- [H264 live stream encode and decode on self-build Image streaming server (C#) and Android app(Xamarin.Forms)](https://qiita.com/ryo_grid/items/b79bc6873df056c31731)
+- [Live AAC audio streaming with ffmpeg.exe and live docode with MediaCodec class of Android (Xamarin)](https://qiita.com/ryo_grid/items/804fd435d58b8704ea9e)
     
-        結果としては、参照した論文に記述された形での実現には失敗したが、不可能ではなさそうという結論であった。
-    
-        なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    
-    ```
-    
-    - [githubリポジトリ](https://github.com/ryogrid/MindWaveSoundOddballExperiment)
-- [Unityでの2D、3Dゲームの開発【2019】](https://unityroom.com/users/lx7jtf3gvrybpua90swk)
-    
-    ```
-      なんとなくコンピュータゲームというソフトウェアがどのような構成で作られているのか理解したいと思い立ち、「砦の攻防」という2Dレトロゲームのオマージュと、「PONG」の3Dバージョンを作ってみた。
-    ```
-    
-    - [砦の攻防モドキ ryo_gridスペシャル](https://unityroom.com/games/toride_modoki)
-    - [PONG風 3D壁打ち](https://unityroom.com/games/3dpongmodoki)
-- [Over-Nat-Lib: 異なるNAT内のPC間でP2P通信をしてファイル転送したり、パイプをつないだりできるツール及びライブラリ【2019】](https://qiita.com/ryo_grid/items/651486649f116700bdae)
-    
-    ```
-      aiortcライブラリを用いてUDPホールパンチングを行いNAT超えしたうえでP2PでのSCTP通信路を確立する（aiortcが持つ、WebRTCのデータチャネル確立の機能を利用）。
-      実装にはPythonを用いた。
-      pipモジュール（onatlib）として配布しており同梱のサーバを2者がローカルで起動することで通信路は確立・維持され、その通信路を使いまわし、同梱のツールを用いたファイル転送やパイプ転送が可能。
-      さらに、ローカルで起動したサーバが通信用にlistenしているポートは任意の通信が可能であり、同梱のツール以外でも確立された通信路でソケット通信を行うことが可能。
-      WebRTCで異なるNAT内にいる二者が通信するためには、2者の情報を仲介するシグナリングサーバとSTUNサーバが必要であるが、前者は自身のサーバでホストし、後者はGoogleが提供しているものを利用している（aiortcにハードコードされている）。
-      ライブラリと銘打ったもののツールがメインになってしまっているが、ローカルサーバを用いた他方との通信を簡易に行うためのpython向けのユーティリティーライブラリも提供している。
-      同ライブラリを用いることで、ローカルサーバの存在を意識せずにソケット通信が可能である。
-      Windowsプラットフォーム向けにはPython環境無しで利用できるよう、githubリポジトリにてexeファイル形式にパッケージングしたものも配布している(releaseのページを参照のこと)。
-      なお、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-    ```
-    
-    - [Introduction of Over-NAT-Lib on English](https://qiita.com/ryo_grid/items/4ce5d45454887500e9c8)
-    - [githubリポジトリ](https://github.com/ryogrid/Over-NAT-Lib)
-- [Python製WebRTC ライブラリ aiortc のデータチャネルを介したファイル転送(P2P直接通信)を行うサンプルプログラムを動かしてみる【2019】](https://qiita.com/ryo_grid/items/74d2310aab3ed4f60584)
-    
-    ```
-      UDPホールパンチングを行いNAT超えしたうえでP2PでのSCTP通信路を確立する。
-      現在はaiortcを利用したデータ転送（ファイル、パイプ）プログラムを設計し実装に着手している。
-      共用シグナリングサーバを独自にホストし、ユーザはPython環境無しに、配布するクライアントソフトウェアを使うだけでOver NATでのファイルや、パイプ経由でのデータ転送(netcatを想像いただきたい)を行えるようにする。
-    ```
-    
-    [Windowsでインストールおよび利用が可能なように修正を加えた aiortc の独自fork](https://github.com/ryogrid/aiortc-dc)
-    
-- [モバイル回線でもパケ死しないような超低帯域のWindows操作用 Androidリモートデスクトップアプリの開発【2018-現在】](https://github.com/ryogrid/RemoteDesktopOneWindowForNovelGrame)
-    
-    ```
-      特定の用途であればFPSを極端に落とし(1FPS程度)、音声品質も落としてデータ通信量を減らしてもよいはずであるが、そのような要件を満たすソフトウェアが見当たらなかったため、開発している。
-      サーバ、Androidアプリ共にC#で開発しており、Android側はXamarinフレームワークを利用している。
-      メディアデータのライブエンコーディング・デコーディングについては、インターネットにもほとんど情報が無く、苦戦しつつ実装し、
-      H264による連続画像の圧縮（差分圧縮ができるため低FPSの画像配信でも有用）、Opusでの音声圧縮に対応(AACでの実装を最初に試したが処理レイテンシが大きすぎてライブ配信では使い物にならなかった)。
-      通信量は画像の差分(例えば、PC画面の表示内容に変化がなければ転送量は極めて小さくなる)によって大きく変化するが、
-      音声が400Byte/s程度、(解像度が1920x1080のPCで、1FPSでスクリーンキャプチャを転送した場合で)画像がほぼゼロから約160KByte/s で変動するというレベルまで落とすことができた。
-      なお、画像データのMaxは全てが書き換わった場合のMaxであるので、ノベルゲームなどのプレイを想定した場合、平均で40KByte/s もあれば十分ではないかと考えている。
-      スマホアプリ側からの、タップ、ロングタップ、ドラッグによるマウス操作も実装済み。
-      また、開発作業は勤務先であるオリィ研究所の研究開発に当ててよいとしている時間でも行わせていただいた。
-      以下はノウハウ共有のために書いた技術記事
-    ```
-    
-    - [H264 live stream encode and decode on self-build Image streaming server (C#) and Android app(Xamarin.Forms)](https://qiita.com/ryo_grid/items/b79bc6873df056c31731)
-    - [Live AAC audio streaming with ffmpeg.exe and live docode with MediaCodec class of Android (Xamarin)](https://qiita.com/ryo_grid/items/804fd435d58b8704ea9e)
-- [Webカメラで表情認識してWebsocketでブラウザアプリ内のキャラを動かす【2018】](https://qiita.com/ryo_grid/items/29425eb80bae1049322d)
+#### [Webカメラで表情認識してWebsocketでブラウザアプリ内のキャラを動かす【2018】](https://qiita.com/ryo_grid/items/29425eb80bae1049322d)
     
     ```
       ローカルで動作させるWebアプリと連携させたかったので、既存のコードを参考にPythonによる顔認識プログラムをWebSocketサーバに仕立てて、Webアプリ内のLive2Dの美少女キャラを顔認識で動かした。
