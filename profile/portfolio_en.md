@@ -22,7 +22,7 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
 ### Contest
 
 - **(Excellence Award)**
-    **Ryo Kambayashi**
+    **Ryo Kanbayashi**
     
     "Realization of Grid Technology for Anyone",
     
@@ -45,18 +45,16 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
 ### Books
 
 - **Ryo Kanbayashi**.
-    "SBM Data Mining I Challenged",.
+    "SBM Data Mining I Challenged",
     
     "Social Bookmarking Continues to Evolve? From the Discussion of Social Bookmarking Study Group", Journal of Information Processing Society of Japan, Vol.19, No.2, pp.191-194.
     
-    Journal of Information Processing Society of Japan, Vol. 19 No. 12, No. 526, 2008, pp. 1421-1423.
-    
-- Twitter Communication Bible, "Chapter 5.4: Twiter-related Web Services."
+- "Twitter Communication Bible", "Chapter 5.4: Twiter-related Web Services."
     My own service, [Hiramaitter](http://ryogrid.net/idea/top), was introduced.
     
     Hiramaitter: A Web service that takes the form of a Twitter bot and uses Twitter's reply function to collect and distribute ideas.
     
-- Netrunner, March 2007 issue, "Search for Three-Star NetWarbys."
+- "Netrunner", March 2007 issue, "Search for Three-Star NetWarbys."
     My own service, [YougakuTube](http://www.outdex.net/diary/archives/2006/12/yougakutubeyoutube.shtml), was featured in the article.
     
     YougakuTube: A web service that aggregates and presents music videos of Billboard ranked songs from Youtube (Western music version of CDTube)
@@ -78,21 +76,20 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     Grid and Pervasive Computing 2009 (GPC 2009)
     
 - Takayuki Banzai, Hitoshi Koizumi, **Ryo Kanbayashi**, Takayuki Imada, Toshihiro Hanawa and Mitsuhisa Sato, "D-Cloud: Design of Design of Open Sensor Nodes for Sharing
-    "D-Cloud: Design of a Software Testing Environment for Reliable Distributed Systems Using Cloud Computing Technology", 10th IEEE/ACM International Symposium
+    "D-Cloud: Design of a Software Testing Environment for Reliable Distributed Systems Using Cloud Computing Technology"
     
     10th IEEE/ACM International Sym-
     posium on Cluster, Cloud and Grid Computing (CCGRID2010) Workshop on
     Second International Symposium on Cloud Computing (Cloud 2010), pp. 631-636, 2010.
-    631-636, 2010
     
 
 ### Research Group
 
 - **Ryo Kanbayashi**, Mitsuhisa Sato
     
-    "A Wide-Area Distributed Architecture for Sensing Web Sharing Open Sensors", in
+    "A Wide-Area Distributed Architecture for Sensing Web Sharing Open Sensors",
     
-    2008 "Saga" Summer Workshop on Parallel/Distributed/Cooperative Processing
+    2008, Saga Summer Workshop on Parallel/Distributed/Cooperative Processing
     (SWoPP Saga 2008),2008-HPC-116, pp. 229-234.
     
 - **Paper received the Best Paper Award**
@@ -101,17 +98,17 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     
     "Fault Tolerance Evaluation Environment for Distributed Systems Using Virtual Machines", 70th National Convention of Information Processing Society of Japan.
     
-    The 70th National Convention of Information Processing Society of Japan, March 2008, pp. 1**-**181 - 1**-**182.
+    The 70th National Convention of Information Processing Society of Japan, March 2008, pp. 181-182.
     
-- **Ryo Kamibayashi**, Takayuki Sakanishi, Hitoshi Koizumi, and Mitsuhisa Sato
+- **Ryo Kanbayashi**, Takayuki Sakanishi, Hitoshi Koizumi, and Mitsuhisa Sato
     
     "A Study of Large Scale Test Farm Using Cloud Environment", 7th Dependable System Workshop
     
     The 7th Dependable System Workshop (DSW'09summer), ISSN 1341-870X, pp. 161-166.
     
-- Takayuki Sakanishi, Hitoshi Koizumi, **Ryo Kambayashi**, Mitsuhisa Sato
+- Takayuki Sakanishi, Hitoshi Koizumi, **Ryo Kanbayashi**, Mitsuhisa Sato
     
-    "A Study of Cloud Computing System Providing Program Testing Environment ", in
+    "A Study of Cloud Computing System Providing Program Testing Environment",
     
     Sendai Summer Workshop on Parallel/Distributed/Cooperative Processing (SWoPP Sendai 2009), 2009-OS-112, No. 19.
     
@@ -127,7 +124,7 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     
 - **Ryo Kanbayashi**
   
-    "My challenge on SBM data mining", [in Japanese], 1st SBM Research Symposium, (SACSIS 2006), May 2006.
+    "My challenge on SBM data mining", 1st SBM Research Symposium, (SACSIS 2006), May 2006.
     
     [The 1st SBM Workshop](http://toremoro.tea-nifty.com/tomos_hotline/2008/06/sbm_0921.html), July 12, 2008.  
     - [Presentation slides](http://es.slideshare.net/rawwell/sbm-presentation)
@@ -266,7 +263,7 @@ I wanted to use it in combination with WebRTC and tried to implement JS, but it 
 - [video of it in action](https://www.youtube.com/watch?v=LRH5X6kaR2E)
 
 #### [Face Deviation Scouter](http://d.hatena.ne.jp/kanbayashi/20150917/p1) 2015-present
-　We devised a method for determining a person's facial deviation based on similarity to the average face of a celebrity, and wrote an article about how to use Microsoft's Twisornot service. The same method was also made into a smartphone application (Android) and released on 11/16/2015, and as of 8/11/2016, 9 months later, it has been downloaded more than 22,000 times. The above article was picked up by Gigazine and other online media. An iOS version of the app was also developed, but it did not pass the review process and was not released because the concept of rating people was not approved.  
+　I devised a method for determining a person's facial deviation based on similarity to the average face of a celebrity, and wrote an article about how to use Microsoft's Twisornot service. The same method was also made into a smartphone application (Android) and released on 11/16/2015, and as of 8/11/2016, 9 months later, it has been downloaded more than 22,000 times. The above article was picked up by Gigazine and other online media. An iOS version of the app was also developed, but it did not pass the review process and was not released because the concept of rating people was not approved.  
 - [Code(Android)](https://github.com/ryogrid/GanmenScouter_android)
 - [Code(iOS)](https://github.com/ryogrid/GanmenScouter)
 
@@ -276,13 +273,13 @@ I wanted to use it in combination with WebRTC and tried to implement JS, but it 
 - [Code(iOS)](https://github.com/ryogrid/CatchBo_ios)
 
 #### [Challenge to KDDCUP2015](https://www.facebook.com/shen.l.liang/posts/10204117354401022) 2015
-　We used neural networks (hierarchical perceptron, tried Deep Learning, RNN, etc.) and xgboost (logistic regression with gradient boosting) to predict user abandonment of web services. The final result ranked 225th with AUC 0.877 (821 total participants).  
+　I used neural networks (hierarchical perceptron, tried Deep Learning, RNN, etc.) and xgboost (logistic regression with gradient boosting) to predict user abandonment of web services. The final result ranked 225th with AUC 0.877 (821 total participants).  
 - [code (python, ruby, lua)](https://github.com/ryogrid/kddcup2015)
 
 
 
 #### [Community extraction and visualization on the subject of Twiter social graph](http://ryogrid.net/wiki/doku.php?id=projects:twitter%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%AB%E3%82%B0%E3%83%A9%E3%83%95%E3%81%8B%E3%82%89%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E6%8A%%E6%87%BABD%E5%87%BA) 2010
-　We performed data mining on the 280 million-edge Twitter social graph to extract communities and visualize them. Since the amount of preprocessing required for data mining was enormous, we implemented distributed processing using Amazon Elastic Map Reduce to improve efficiency.  
+　I performed data mining on the 280 million-edge Twitter social graph to extract communities and visualize them. Since the amount of preprocessing required for data mining was enormous, we implemented distributed processing using Amazon Elastic Map Reduce to improve efficiency.  
     
 #### [P2P Nico-douga Cache Sharing Proxy](http://d.hatena.ne.jp/kanbayashi/20071229/p1) 2007
 　An attempt to build a peer to peer (P2P) network to mutually cache Nico Nico Douga video data and contribute to server load reduction. An experimental prototype was implemented by adding a cache sharing function using P2PSocket to NicoCache_nl.  
