@@ -1,4 +1,4 @@
-Japanese/ **[English](https://ryogrid.net/profile/publication_en.html)**
+Japanese/ **[English](https://ryogrid.github.io/profile/portfolio_en.html)**
  
 
     
