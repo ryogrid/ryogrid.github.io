@@ -22,17 +22,15 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
 ### Contest
 
 - **(Excellence Award)**
-    
     **Ryo Kambayashi**
     
-    "Realization of grid technology that can be used by the general public",.
+    "Realization of Grid Technology for Anyone",
     
     Japan Science & Engineering Challenge, JSEC2003.
     
     Research: [Collatz's Anti-Example@home Project](https://github.com/ryogrid/collatz-s-anti-example-home)
     
-- **Ryo Kanbayashi**
-    
+- **Ryo Kanbayashi**  
     "Realization of Grid Technology for Anyone", Intel ISEF 2004, May 2004.
     
     Intel ISEF 2004, May 2004.
@@ -41,14 +39,12 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
 ### Patents
 
 - **Ryo Kanbayashi**, Tsuyoshi Hashimoto, Applicant:Fujitsu Limited
-    
-    "Computer System, Processing Method and Job Processing Program", [Patent-6446989](https://www.j-platpat.inpit.go.jp/c1800/PU/JP-6446989/8045132A840F35810E93B3FFB515B4661BB 13749778EFB053B67470F89F2868F/15/en)
+    "Computer System, Processing Method and Job Processing Program", [Patent-6446989](https://www.j-platpat.inpit.go.jp/c1800/PU/JP-6446989/8045132A840F35810E93B3FFB515B4661BB13749778EFB053B67470F89F2868F/15/en)
     
 
 ### Books
 
-- **Ryo Kambayashi**.
-    
+- **Ryo Kanbayashi**.
     "SBM Data Mining I Challenged",.
     
     "Social Bookmarking Continues to Evolve? From the Discussion of Social Bookmarking Study Group", Journal of Information Processing Society of Japan, Vol.19, No.2, pp.191-194.
@@ -56,13 +52,11 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     Journal of Information Processing Society of Japan, Vol. 19 No. 12, No. 526, 2008, pp. 1421-1423.
     
 - Twitter Communication Bible, "Chapter 5.4: Twiter-related Web Services."
+    My own service, [Hiramaitter](http://ryogrid.net/idea/top), was introduced.
     
-    My own service, [Hiramaittai](http://ryogrid.net/idea/top), was published.
-    
-    HiramaItaly: A Web service that takes the form of a Twitter bot and uses Twitter's reply function to collect and distribute ideas.
+    Hiramaitter: A Web service that takes the form of a Twitter bot and uses Twitter's reply function to collect and distribute ideas.
     
 - Netrunner, March 2007 issue, "Search for Three-Star NetWarbys."
-    
     My own service, [YougakuTube](http://www.outdex.net/diary/archives/2006/12/yougakutubeyoutube.shtml), was featured in the article.
     
     YougakuTube: A web service that aggregates and presents music videos of Billboard ranked songs from Youtube (Western music version of CDTube)
@@ -71,7 +65,6 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
 ### International Journals
 
 - **Ryo Kanbayashi**, Mitsuhisa Sato
-    
     "A distributed architecture of Sensing Web for sharing open sensor nodes", Future Generation Computer Systems, Volume 27
     
     Future Generation Computer Systems, Volume 27, Issue 5, May 2011, Pages 643-648
@@ -80,13 +73,11 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
 ### International Conferences
 
 - **Ryo Kanbayashi**, Mitsuhisa Sato, "A Distributed Architecture of Sensing Web for sharing open sensor nodes
-    
     "A Distributed Architecture of Sensing Web for Sharing Open Sensor Nodes", Grid and Pervasive Computing
     
     Grid and Pervasive Computing 2009 (GPC 2009)
     
 - Takayuki Banzai, Hitoshi Koizumi, **Ryo Kanbayashi**, Takayuki Imada, Toshihiro Hanawa and Mitsuhisa Sato, "D-Cloud: Design of Design of Open Sensor Nodes for Sharing
-    
     "D-Cloud: Design of a Software Testing Environment for Reliable Distributed Systems Using Cloud Computing Technology", 10th IEEE/ACM International Symposium
     
     10th IEEE/ACM International Sym-
@@ -134,20 +125,16 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     
     Symposium on Advanced Computing Infrastructure Systems, (SACSIS 2006), May 2006.
     
-- **Ryo Kamibayashi**
-    
+- **Ryo Kanbayashi**
+  
     "My challenge on SBM data mining", [in Japanese], 1st SBM Research Symposium, (SACSIS 2006), May 2006.
     
-    [The 1st SBM Workshop](http://toremoro.tea-nifty.com/tomos_hotline/2008/06/sbm_0921.html), July 12, 2008.
-    
+    [The 1st SBM Workshop](http://toremoro.tea-nifty.com/tomos_hotline/2008/06/sbm_0921.html), July 12, 2008.  
     - [Presentation slides](http://es.slideshare.net/rawwell/sbm-presentation)
 
 ### Television Appearances
-
 - June 23, 2013, BS Asahi, "Fujitsu Special: Pioneering the Future! The Challenge of Young Scientists II".
-    
     As an alumnus of JSEC (Japan Science and Engineering Challenge) (winner in 2003) & ISEF (International Science and Engineering Fair) (dispatched in 2004), I am currently working at Fujitsu Ltd. He gave encouragement to the high school students by sharing his current work (engaged in software research and development of the supercomputer K computer at Fujitsu Limited).
-    
     - [Video (Digest of TV broadcast)](http://www.youtube.com/watch?v=1ekbgyGrMLs)
     
 
@@ -162,7 +149,6 @@ After developing a distributed KVS, I became interested in the internal design a
 - [GitHub repository](https://github.com/ryogrid/SamehadaDB)
     
 #### [Rust implementation of FunnelKVS, a DHT-based distributed KVS](https://github.com/ryogrid/FunnelKVS/blob/master/ARCHITECTURE.md) 2020-present
-
 　A distributed KVS (access interface is REST) was implemented as a subject for Rust language learning.  
 　First, a simple simulator was developed in Python to verify whether the design (recognition) based on the Chord algorithm (protocol) adopted as the node lookup mechanism was correct before implementing the real system.  
 　The simulator was then ported to the Rust language.  
@@ -179,7 +165,7 @@ Howerver, we were able to confirm that at least 20 nodes can scale the overall t
 - [github repository](https://github.com/ryogrid/fx_systrade/tree/thesis-based-dqn-trade-ryogird-special-qiita-2006)
 
 #### [Attempts to Communicate Intention with a Consumer EEG Sensing Headset](https://qiita.com/ryo_grid/items/6e6028b02004455a48ff) 2020
-　We attempted to see if brain wave headset (about 20,000 yen) at the level of consumer products could be used for intention communication, referring to papers as appropriate.  
+　I attempted to see if brain wave headset (about 20,000 yen) at the level of consumer products could be used for intention communication, referring to papers as appropriate.  
 　As a result, we failed to realize the form described in the papers we referred to, but we concluded that it was not impossible.  
 　The development work was also done during the time allowed for research and development at the Oly Research Institute, where I work.  
 - [github repository](https://github.com/ryogrid/MindWaveSoundOddballExperiment)
@@ -245,7 +231,7 @@ I wanted to use it in combination with WebRTC and tried to implement JS, but it 
 　The development work was also done during the time that is allowed to be allocated for research and development at the Oly Research Institute, where I work.
    
 #### [Predicting the rise and fall of stock prices (Dow Jones Industrial Average) using the results of Twitter sentiment analysis and a set of technical indicators](https://qiita.com/ryo_grid/items/5a5ecc602186a3381c87) 2017-present
-　We used the results of Twitter sentiment analysis (using calmness) and a set of technical indicators to forecast the rise and fall of stock prices (Dow Jones Industrial Average), obtaining 70% accuracy in predicting the closing price and 65% accuracy in predicting the opening price.  
+　I used the results of Twitter sentiment analysis (using calmness) and a set of technical indicators to forecast the rise and fall of stock prices (Dow Jones Industrial Average), obtaining 70% accuracy in predicting the closing price and 65% accuracy in predicting the opening price.  
 　The implementation was done in Python, using the Xgboost library for regression with decision trees.  
 　The development work was done during the time allowed for research and development at the ORIX Research Institute, where I work.  
     
@@ -261,7 +247,7 @@ I wanted to use it in combination with WebRTC and tried to implement JS, but it 
 - [Code](https://github.com/ryogrid/DQN_AI_gym)
 
 #### [Simulation of an inverted pendulum and biped robot using deep reinforcement learning (DQN) in Open AI Gym](http://qiita.com/ryo_grid/items/94f3a95d1e8d2ccddd6a) 2017
-　We used Open AI Gym, an AI simulation platform in Python, to simulate DQN learning.  
+　I used Open AI Gym, an AI simulation platform in Python, to simulate DQN learning.  
 　The development work was also done during the time allowed for research and development at the Oly Institute, where I work.  
 - [code](https://github.com/ryogrid/DQN_AI_gym)
 
@@ -271,7 +257,7 @@ I wanted to use it in combination with WebRTC and tried to implement JS, but it 
 - [Code](https://github.com/ryogrid/RL_reversi)
 
 #### [Game Server for Poker Using WebSockets (Python)](http://qiita.com/ryo_grid/items/d472bcd078ec9acc20cc) 2016
-　We developed a poker (Texas Hold'em) game server in Python that can be played in a browser using WebSockets. The design of the server, in which operations are command-based and dealing is done by a human operator, made it possible to implement the server with a very small amount of code. Users can also chat with each other when playing.  
+　I developed a poker (Texas Hold'em) game server in Python that can be played in a browser using WebSockets. The design of the server, in which operations are command-based and dealing is done by a human operator, made it possible to implement the server with a very small amount of code. Users can also chat with each other when playing.  
 - [Code](https://github.com/ryogrid/chat-holdem)
   
 #### [Arduino lamp to represent price changes in exchange](http://qiita.com/ryo_grid/items/062eabe34924822a9588) 2016
@@ -342,7 +328,7 @@ I wanted to use it in combination with WebRTC and tried to implement JS, but it 
 　Developed the basic software to realize Sensing Web, a concept that aims to create a web environment using open sensor data. The user can remotely place a program for data processing in the vicinity of the sensor (privacy information is removed in the vicinity of the sensor and transferred to the user). ptrace-based system call emulation is used to realize a sandbox configuration and virtual devices.  
 
 #### [D-Cloud](http://ryogrid.net/~ryo/dist/kanbayashi_master_thesis.pdf) 2009
-　A large-scale test farm, D-Cloud, was developed; D-Cloud is based on Eucalyptus, an open source cloud building software. Users can test large-scale distributed systems without being bothered by their complexity, thanks to the automation of test environment construction and verification tasks and large-scale computing resources provided by D-Cloud. D-Cloud accelerates the testing process in software development. To support system construction and test execution in software testing of distributed systems, D-Cloud provides a means to define and execute tests intuitively and flexibly by using a description format that combines XML description and the Ruby language, which allows flexible description of behavior (= automatic test environment construction tool in a cloud environment, test scenario execution tool in a distributed environment). test scenario execution tools in a distributed environment).  
+　A large-scale test farm, D-Cloud, was developed; D-Cloud is based on Eucalyptus, an open source cloud building software. Users can test large-scale distributed systems without being bothered by their complexity, thanks to the automation of test environment construction and verification tasks and large-scale computing resources provided by D-Cloud. D-Cloud accelerates the testing process in software development. To support system construction and test execution in software testing of distributed systems, D-Cloud provides a means to define and execute tests intuitively and flexibly by using a description format that combines XML description and the Ruby language, which allows flexible description of behavior (= automatic test environment construction tool in a cloud environment, test scenario execution tool in a distributed environment). test scenario execution tools in a distributed environment.  
     
 
 --- 
