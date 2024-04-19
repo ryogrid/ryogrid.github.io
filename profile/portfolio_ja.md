@@ -154,10 +154,10 @@ back to [Profile](https://ryogrid.net/profile/index.html)
 ### 開発したソフトウェア (プライベート、オリィ研究所、及び大学での研究活動)
 #### [ゴシッププロトコルベースのNAT透過なオーバレイネットワークを構築するためのライブラリ gossip-overlay の開発【2023-現在】](https://github.com/ryogrid/gossip-overlay)
 NAT内のマシンも参加可能なオーバレイネットワークを構築できるようにしたいと考え、ゴシッププロトコルベースでライブラリを開発した。実装言語はGo言語である。  
-　元々、[weaveworks/mesh](https://github.com/weaveworks/mesh) を用いることで上述のだけであれば実現されていたが、オーバレイネットワークのレイヤで見ると、そこでの通信はUDPのようなもので、送信したデータが到達することは（ロス率はさほど高くはならないと思われるが）保証されず、順序も保証されないというものであった。また、利用しようと思うとドキュメントが不足しており、実装を読んで使い方を調べる必要もあった。  
-　そこで、IPに対するTCPのように、meshのオーバレイでのメッセージングの上に、信頼性のあるコネクションベースで、サーバ-クライアントのI/Fを提供するレイヤを実装したものがgossip-overlayである。I/Fも直感的に利用できるように整理している。  
+　元々、[weaveworks/mesh](https://github.com/weaveworks/mesh) を用いることで上述だけであれば実現されていたが、オーバレイのレイヤで見ると、そこでの通信はUDPのようなもので、送信したデータが到達することは（ロス率はさほど高くはならないと思われるものの）保証されず、順序も保証されないというものであった。また、利用しようと思うとドキュメントが不足しており、実装を読んで使い方を調べる必要もあった。  
+　そこで、IPに対するTCPのように、meshのオーバレイでのメッセージングの上で、信頼性のあるコネクションベースでの、サーバ-クライアントのI/Fを提供する実装がgossip-overlayである。I/Fも直感的に利用できるように整理している。  
 　信頼性のある通信路の構築にはSCTPプロトコルを採用し、その実装には[pion/sctp](https://github.com/pion/sctp) ライブラリを用いた。  
-　gossip-overlayのテストも兼ねたアプリケーションとしてポートフォワーディングツールの[gossip-port-forward](https://github.com/ryogrid/gossip-port-forward])と、オーバレイ上で動作する分散KVS [gord-overlay](https://github.com/ryogrid/gord-overlay) を実装した。いずれも既存のソフトウェアにgossip-overlayを組み込むという形で実装が行われている。オリジナルのソフトウェアを開発者された２方に感謝する。また、meshの開発者の方々に感謝する。
+　gossip-overlayのテストも兼ねたアプリケーションとしてポートフォワーディングツールの[gossip-port-forward](https://github.com/ryogrid/gossip-port-forward])と、オーバレイ上で動作する分散KVS [gord-overlay](https://github.com/ryogrid/gord-overlay) を実装した。いずれも既存のソフトウェアにgossip-overlayを組み込むという形で実装が行われている。オリジナルのソフトウェアを開発者された2方に感謝する。また、meshの開発者の方々に感謝する。
 - [GitHubリポジトリ](https://github.com/ryogrid/gossip-overlay)
 - [gord-overlay実装時のメモ書き](https://zenn.dev/ryogrid/scraps/42d5c81e8604fd)
 
