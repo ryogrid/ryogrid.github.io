@@ -166,8 +166,7 @@ NAT内のマシンも参加可能なオーバレイネットワークを構築�
 分散KVSを開発してみて、より広く用いられているRDBの内部設計や実装に興味を持ったため、自身でも開発してみることにした。  
 　ゼロベースでの実装は困難であるため、Carnegie Mellon University（CMU）のオープンコースウェアな講義で教育用実装として公開されている[BusTub](<https://github.com/cmu-db/bustub>)をベースに開発を進めている。  
 　元の実装はC++により行われているが、よりモダンな言語で実装したいという理由から実装にはGoを採用した。  
-　C++ to Go のポーティングは [go-bustub](<https://github.com/brunocalza/go-bustub>) というプロジェクトによりある程度成されていたため、直接的にはそのプロジェクトのコードをベースとしている。  
-　もともと個人プロジェクトであったが、一人ではめげそうであるという理由から共同開発者を募り、現在は自身を含む2名で開発を進めている。  
+　C++ to Go のポーティングは [go-bustub](<https://github.com/brunocalza/go-bustub>) というプロジェクトによりある程度成されていたため、直接的にはそのプロジェクトのコードをベースとしている。    
 - [GitHubリポジトリ](https://github.com/ryogrid/SamehadaDB)
       
 #### [DHTベースの分散KVSであるFunnelKVSのRustによる実装【2020-現在】](https://github.com/ryogrid/FunnelKVS/blob/master/ARCHITECTURE.md)
