@@ -152,6 +152,17 @@ back to [Profile](https://ryogrid.net/profile/index.html)
     
 
 ### 開発したソフトウェア (プライベート、オリィ研究所、及び大学での研究活動)
+#### [NAT内のマシンも参加可能なピュアP2P分散マイクロブログシステム NostrP2P の開発【2024-現在】](https://github.com/ryogrid/nostrp2p)
+既存の分散マイクロブログ（SNS）の比較的少数のサーバで構成するシステム設計は、サーバ運用者に実質ボランティアの形で金銭や運用作業の負担を強いる。このことが、システム継続性の課題となっていくのではないかと考え、利用者皆が比較的簡易にサーバを運用でき、それらが連携することで1つのマイクロブログとして動作するような設計を検討し実装した。実装言語はGo言語（サーバ）およびdart言語（クライアント）である。    
+　マイクロブログとして利用する際には、自身で立てたサーバにブラウザアプリやネイティブアプリの形で実装したクライアントでアクセスをする。この点ではサーバ-クライアントの構成も含む設計となっている。サーバとはRESTのI/Fで通信する。  
+　サーバがオーバレイNW上で連携する、また、サーバとクライアント間の通信がWebsocketではなくRESTであるという点を除けば、[Nostrプロトコル](https://nostr.com/)とおおむね同様のプロトコルを採用している。システムの名称がNostrP2Pとなっているのも、大枠として見れば、NostrP2PがNostrにおけるリレーサーバをシングルイメージで分散させたようなものなためである。Nostrプロトコルにおおむね寄せた設計とした理由は、実装が比較的容易であるため、Nostrのエコシステムを流用できるため、Nostrプロトコルベースのシステムと連携できれば面白いかもしれないと考えたため、の3つである。  
+　[クライアント](https://github.com/ryogrid/flustr-for-nosp2p) の開発ではFlutter（言語としてはdart）を採用した。実装はNostrのクライアントである[uchijo/flustr](https://github.com/uchijo/flustr)をforkし、NostrP2P用に書き換えた上で、エンハンスする形で行った。flustrの開発者であるuchijo氏に感謝する。    
+　NostrP2Pでは、NAT内のマシンが参加可能とするためにNAT透過なオーバレイネットワークを構築する必要があるが、これには [weaveworks/mesh](https://github.com/weaveworks/mesh) を用い、自身で開発したラッパーである[gossip-overlay](https://github.com/ryogrid/gossip-overlay) は用いていない。これはNostrP2Pにおいてはアプリケーションの特性から、多少のメッセージのロストや到達順序の入れ替わりは許容可能であり、決して小さくないオーバヘッドを伴うgossip-overlayでのコネクションベース通信を採用する必要はないと判断したためである。  
+- [トライアルネットワークでのデモ](https://zenn.dev/link/comments/f224649b86cb10)
+- [コンセプト詳細（英語）](https://gist.github.com/ryogrid/fa2bfa284784c866ad88e3c38445752a)
+- [GitHubリポジトリ](https://github.com/ryogrid/nostrp2p)
+- [実装時のメモ書き](https://zenn.dev/ryogrid/scraps/ff60eb3a393623)
+
 #### [ゴシッププロトコルベースのNAT透過なオーバレイネットワークを構築するためのライブラリ gossip-overlay の開発【2023-現在】](https://github.com/ryogrid/gossip-overlay)
 NAT内のマシンも参加可能なオーバレイネットワークを構築できるようにしたいと考え、ゴシッププロトコルベースでライブラリを開発した。実装言語はGo言語である。  
 　元々、[weaveworks/mesh](https://github.com/weaveworks/mesh) を用いることで上述だけであれば実現されていたが、オーバレイのレイヤで見ると、そこでの通信はUDPのようなもので、送信したデータが到達することは（ロス率はさほど高くはならないと思われるものの）保証されず、順序も保証されないというものであった。また、利用しようと思うとドキュメントが不足しており、実装を読んで使い方を調べる必要もあった。  
