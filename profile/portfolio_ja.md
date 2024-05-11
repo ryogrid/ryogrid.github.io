@@ -169,7 +169,7 @@ NAT内のマシンも参加可能なオーバレイネットワークを構築�
 　C++ to Go のポーティングは [go-bustub](<https://github.com/brunocalza/go-bustub>) というプロジェクトによりある程度成されていたため、直接的にはそのプロジェクトのコードをベースとしている。    
 - [GitHubリポジトリ](https://github.com/ryogrid/SamehadaDB)
       
-#### [DHTベースの分散KVSであるFunnelKVSのRustによる実装【2020-現在】](https://github.com/ryogrid/FunnelKVS/blob/master/ARCHITECTURE.md)
+#### [DHTベース分散KVS FunnelKVSのRustによる実装【2020-現在】](https://github.com/ryogrid/FunnelKVS/blob/master/ARCHITECTURE.md)
 
 　Rust言語学習の題材として分散KVS（アクセスインタフェースはREST）を実装した。  
 　初めにノードルックアップの仕組みとして採用するChordアルゴリズム（プロトコル）に基づいた設計（認識）に誤りが無いか、Pythonで簡易なシミュレータを開発し実システム実装前の設計検証を行った。  
