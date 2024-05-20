@@ -135,7 +135,7 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     - [Video (Digest of TV broadcast)](http://www.youtube.com/watch?v=1ekbgyGrMLs)
 
 ### Developed software (private development and university research activities)
-#### [Development of NostrP2P, a pure P2P distributed microblogging system that allows machines inside NAT to participate]() 2024-Present
+#### [Development of NostrP2P, a pure P2P distributed microblogging system that allows machines inside NAT to participate](https://github.com/ryogrid/nostrp2p) 2024-Present
 The system design of existing distributed microblogs (SNS), which consists of a relatively small number of servers, forces server operators to bear the burden of money and operational work in the form of volunteers. Considering that this may become an issue for system continuity, we are considering a design that allows all users to operate the server relatively easily, and that works together as one microblog. I implemented it. The implementation languages ​​are Go language (server) and dart language (client).  
 　When using it as a microblog, you access the server you set up with a client implemented in the form of a browser app or native app. In this respect, the design includes a server-client configuration. Communicate with the server using REST I/F. It uses a protocol that is roughly the same as the Nostr protocol.  
 　　except that the servers cooperate on an overlay network, and the communication between the server and client is REST rather than Websocket . The reason why the system is named NostrP2P is because, broadly speaking, NostrP2P is like a distributed relay server in Nostr in a single image. The reason for the design being based on the Nostr protocol is that it is relatively easy to implement, the Nostr ecosystem can be used, and we thought it might be interesting to work with a system based on the Nostr protocol. be. For client development, we adopted Flutter (dart as the language). The implementation was done by forking the Nostr client uchijo/flustr , rewriting it for NostrP2P, and enhancing it. Thanks to uchijo, the developer of flustr.  
@@ -143,19 +143,19 @@ The system design of existing distributed microblogs (SNS), which consists of a 
 　This is because we have determined that in NostrP2P, due to the characteristics of the application, it is acceptable for some messages to be lost or the order of arrival to be changed, and there is no need to adopt connection-based communication using gossip-overlay, which involves a considerable amount of overhead. be.  
 　
 
-- [Demo on trial network]()  
-- [Concept details (English)]()  
-- [GitHub repository]()  
-- [Writing notes during implementation]()  
+- [Demo on trial network](https://gist.github.com/ryogrid/5080ff36b6786902d40bb4b91de0766e)  
+- [Concept details (English)](https://gist.github.com/ryogrid/fa2bfa284784c866ad88e3c38445752a)  
+- [GitHub repository](https://github.com/ryogrid/nostrp2p)  
+- [Writing notes during implementation(in Japanese)]()  
 
-#### [Development of gossip-overlay, a library for building a NAT-transparent overlay network based on gossip protocol]() 2023-Present
+#### [Development of gossip-overlay, a library for building a NAT-transparent overlay network based on gossip protocol]()https://github.com/ryogrid/gossip-overlay 2023-Present
 We wanted to be able to build an overlay network that machines inside NAT can also participate in, so we developed a library based on the gossip protocol. The implementation language is Go language.  
-　Originally, the above was achieved by using weaveworks/mesh , but when looking at the overlay layer, the communication there is like UDP, and the transmitted data does not reach (the loss rate is Although the cost was not expected to be very high, it was not guaranteed and the ordering was not guaranteed. Also, when I tried to use it, there was a lack of documentation, so I had to read the implementation and find out how to use it.  
+　Originally, the above was achieved by using [weaveworks](https://github.com/ryogrid/gossip-overlay)/mesh , but when looking at the overlay layer, the communication there is like UDP, and the transmitted data does not reach (the loss rate is Although the cost was not expected to be very high, it was not guaranteed and the ordering was not guaranteed. Also, when I tried to use it, there was a lack of documentation, so I had to read the implementation and find out how to use it.  
 　Therefore, gossip-overlay is an implementation that provides a reliable connection-based server-client I/F on top of mesh overlay messaging, similar to TCP for IP. The I/F is also organized so that it can be used intuitively.  
 　The SCTP protocol was adopted to build a reliable communication path, and the pion/sctp library was used to implement it. We implemented gossip-port-forward, a port forwarding tool, and distributed KVS gord-overlay, which operates on the overlay, as applications that also serve as tests for gossip-overlay . Both are implemented by incorporating gossip-overlay into existing software. We would like to thank the two developers of the original software. We would also like to thank the mesh developers.
 
-- [GitHub repository]()  
-- [Writing notes when implementing gord-overlay]()
+- [GitHub repository](https://github.com/ryogrid/gossip-overlay)  
+- [Writing notes when implementing gord-overlay(in Japanese)]()
 
 #### [Development of SamehadaDB, a simple relational database (RDB)](https://github.com/ryogrid/SamehadaDB) 2021-present
 After developing a distributed KVS, I became interested in the internal design and implementation of more widely used RDBs and decided to develop one myself.  
