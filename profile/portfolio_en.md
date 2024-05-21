@@ -146,7 +146,7 @@ The system design of existing distributed microblogs (SNS), which consists of a 
 - [Demo on trial network](https://gist.github.com/ryogrid/5080ff36b6786902d40bb4b91de0766e)  
 - [Concept details (English)](https://gist.github.com/ryogrid/fa2bfa284784c866ad88e3c38445752a)  
 - [GitHub repository](https://github.com/ryogrid/nostrp2p)  
-- [Writing notes during implementation(in Japanese)]()  
+- [Writing notes during implementation(in Japanese)](https://zenn.dev/ryogrid/scraps/ff60eb3a393623)  
 
 #### [Development of gossip-overlay, a library for building a NAT-transparent overlay network based on gossip protocol]()https://github.com/ryogrid/gossip-overlay 2023-Present
 We wanted to be able to build an overlay network that machines inside NAT can also participate in, so we developed a library based on the gossip protocol. The implementation language is Go language.  
@@ -155,7 +155,7 @@ We wanted to be able to build an overlay network that machines inside NAT can al
 　The SCTP protocol was adopted to build a reliable communication path, and the pion/sctp library was used to implement it. We implemented gossip-port-forward, a port forwarding tool, and distributed KVS gord-overlay, which operates on the overlay, as applications that also serve as tests for gossip-overlay . Both are implemented by incorporating gossip-overlay into existing software. We would like to thank the two developers of the original software. We would also like to thank the mesh developers.
 
 - [GitHub repository](https://github.com/ryogrid/gossip-overlay)  
-- [Writing notes when implementing gord-overlay(in Japanese)]()
+- [Writing notes when implementing gord-overlay(in Japanese)](https://zenn.dev/ryogrid/scraps/42d5c81e8604fd)
 
 #### [Development of SamehadaDB, a simple relational database (RDB)](https://github.com/ryogrid/SamehadaDB) 2021-present
 After developing a distributed KVS, I became interested in the internal design and implementation of more widely used RDBs and decided to develop one myself.  
