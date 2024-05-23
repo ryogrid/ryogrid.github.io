@@ -143,7 +143,6 @@ The system design of existing distributed microblogs (SNS), which consists of a 
 　For client development, we adopted Flutter (dart as the language). The implementation was done by forking the Nostr client [uchijo/flustr](https://github.com/uchijo/flustr) , rewriting it for NostrP2P, and enhancing it. Thanks to uchijo, the developer of flustr.  
 　In NostrP2P, it is necessary to build a NAT-transparent overlay network so that machines inside the NAT can participate, but this uses [weaveworks/mesh](https://github.com/weaveworks/mesh) and does not use [ryogrid/gossip-overlay](https://github.com/ryogrid/gossip-overlay), a wrapper that I developed myself.  
 　This is because we have determined that in NostrP2P, due to the characteristics of the application, it is acceptable for some messages to be lost or the order of arrival to be changed, and there is no need to adopt connection-based communication using gossip-overlay. Overhead of connection establishment is not small at gossip-overlay.  
-　
 
 - [Demo on trial network](https://gist.github.com/ryogrid/5080ff36b6786902d40bb4b91de0766e)  
 - [Concept details (English)](https://gist.github.com/ryogrid/fa2bfa284784c866ad88e3c38445752a)  
