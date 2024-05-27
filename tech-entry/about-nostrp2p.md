@@ -129,9 +129,9 @@ If it works, it should display as shown below.
 ### Client settings
 Click/touch the gear mark at the top right of the screen and perform the following on the displayed screen.
 
-- 1. Set the following for the Trial account as the private key
+- 1) Set the following for the Trial account as the private key
   - nsec1uvktv4u3csltg98caqzux3u0kawxz3mppxjqw40lcytqt52kdslshwr2xp
-- 2. Set the server address
+- 2) Set the server address
   - Enter the following address of the demo server
   - https://ryogrid.net:8889
 
@@ -170,11 +170,11 @@ If you want to have your own account, you need to set up your own server, connec
   - ["Making VPN-targeted Web Apps HTTPS-compatible with Tailscale's Built-in Reverse Proxy - DevelopersIO"](https://dev.classmethod.jp/articles/use-tailscale-builtin-reverse-proxy/)
   - By using this, you can access your server from devices participating in the VPN using the demo client
   - To simplify, introduce Tailscale and refer to the above article while mapping access to "/" to "http://127.0.0.0:<mentioned port number>/", then set the server address in the client to the address assigned by Tailscale, "something.number.ts.net"
-  - The URL will be like this -> https://something.number.ts.net/
+  - The URL will be like this -> https://something.taildXYZ.ts.net/
 
 #### Using Native Clients
 - When using the various native clients available, the REST I/F of the personal server can remain as HTTP
-  - https://github.com/ryogrid/flustr-for-nosp2p/releases/tag/latest
+  - [https://github.com/ryogrid/flustr-for-nosp2p/releases/tag/latest](https://github.com/ryogrid/flustr-for-nosp2p/releases/tag/latest)
 
 ## Challenges in Design and Development
 - Struggled with design decisions
@@ -186,16 +186,16 @@ If you want to have your own account, you need to set up your own server, connec
     - Familiar with the Flutter framework used in Flustr, it was a good fit as I am not fond of web frontend frameworks
     - Struggled with understanding riverpod, used for state management
   - Although there are many third-party libraries for Dart/Flutter, many do not support web builds
-    - For example, the HTTP2 library does not support web builds, so HTTP2 adoption was postponed
-    - Flutter Web's stability is still lacking, requiring workaround solutions
+    - For example, the HTTP2 library does not support web builds, so HTTP2 is not used
+    - Flutter Web's stability is still lacking, I did some workaround solutions
 
 ## Remaining Issues
-- The GitHub repository for the mesh library suggests scaling up to about 100 nodes, but it may not be usable for larger scales
+- The GitHub repository of the mesh library say NW could scaling up to about 100 nodes, but it may mean that mesh library is not usable for larger scales
   - Although it performs relatively intelligent routing, it might struggle with routing decisions and updating node information with more nodes
-  - If 100 nodes is the limit, a custom communication foundation might be necessary
+  - If 100 nodes is the limit, developing more scalable communication foundation might be necessary
 - Broadcasting posts to all users may be impractical with more servers
 - While signature verification prevents impersonation, multiple servers starting with the same public key can cause message delivery issues
-- The network could become dysfunctional if flooded with messages, and currently, there is no countermeasure against such attacks
+- The network could become dysfunctional if someone sends large amount of messages, and currently, there is no countermeasure against such attacks
 - Running a server 24/7 might be difficult for users who don't already operate a server, limiting the potential user base
 
 Enjoy!
