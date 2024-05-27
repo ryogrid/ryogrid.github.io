@@ -1,7 +1,5 @@
----
-layout: default
-title: NostrP2P: Pure P2P Distributed Microblogging System 
----
+# **NostrP2P: Pure P2P Distributed Microblogging System**
+
 
 Hello. This is ryo_grid.
 
@@ -14,11 +12,11 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
 Here is the eye-catching image.
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/9fce752c-3d73-fa48-10ea-0770330a3b38.png)
 
-# Prerequisite Knowledge
+## Prerequisite Knowledge
 - A rough understanding of the [Nostr](https://github.com/nostr-protocol/nips) protocol
   - You can refer to [this article](https://zenn.dev/mattn/articles/cf43423178d65c) for sufficient understanding
 
-# Background of Development
+## Background of Development
 - Originally, I wanted to create a pure P2P application that works on an overlay that traverses NAT
   - I once created a [DHT-based distributed KVS](https://qiita.com/ryo_grid/items/9a82d7230fbc4a0875c1), but it could not traverse the NAT wall
 - From the above idea, I wondered if I could roughly implement a NAT traversal overlay with a gossip protocol, etc.
@@ -34,11 +32,11 @@ Here is the eye-catching image.
 - All the above mixed together, and since the timing coincided roughly, I decided to create the NostrP2P mentioned in the title
   - (One reason was that I couldn't find an implementation of distributed microblogging with pure P2P as far as I searched. If anyone knows, I would be grateful if you could let me know in the comments section)
 
-# Concept of NostrP2P
+## Concept of NostrP2P
 - **A system composed of the contributions of all users**
   - Issue: The design of existing distributed SNS (Mastodon, Nostr, Bluesky, etc.) places a high financial and operational burden on server operators, and when viewed as a system as a whole, it lacks soundness (as it seems to me)
 
-# Features of NostrP2P
+## Features of NostrP2P
 - A system centered around broadcast using the gossip protocol
   - Uses the [weaveworks/mesh](https://github.com/weaveworks/mesh) library, which enables the construction of an overlay network and various types of messaging on it, as the communication infrastructure
 - Focuses more on ease of implementation and simplicity rather than performance and data consistency
@@ -59,7 +57,7 @@ Here is the eye-catching image.
   System configuration concept diagram  
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/83fc6146-0e15-a363-ddac-d3d373c21c48.png)
 
-# Details (Design and Implementation)
+## Details (Design and Implementation)
 - Each user sets up their own server, and client access is limited to their own server
   - If the server is set up on a home machine (i.e., a machine without a global IP), direct access from mobile devices over mobile networks is not possible, but it can be handled by setting up a VPN with tools like Tailscale
   - **However, without servers operating with public IPs, the overlay system cannot function**
@@ -93,7 +91,7 @@ Here is the eye-catching image.
   - As mentioned above, when adding or updating information related to the user, such as posting from the client, a signature is attached
   - Conversely, in the design of NostrP2P, the user's own server is a trusted entity, so the client does not verify the signatures of received data. Therefore, the server can send the signature information empty to reduce communication volume
 
-# Supported features
+## Supported features
 - Posting
   - Currently, to keep the implementation simple, broadcast to all users on the overlay NW
     - Honestly, if the number of users reaches the order of hundreds, this design will have its limits
@@ -117,18 +115,18 @@ Here is the eye-catching image.
 - Hashtags
   - Not supported as it would increase the load of post search processing on the server and generate queries to the entire NW
 
-# Demo
+## Demo
 Try connecting to the demo server with the web client.
 If it works, it should display as shown below.
 
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/9fce752c-3d73-fa48-10ea-0770330a3b38.png)
 
-## Web client
+### Web client
 - [https://nostrp2p.vercel.app/](https://nostrp2p.vercel.app/)
   - Made with Flutter
   - Recommended to access with Chrome on PC, smartphone, or tablet
 
-## Client settings
+### Client settings
 Click/touch the gear mark at the top right of the screen and perform the following on the displayed screen.
 
 - ① Set the following for the Trial account as the private key
@@ -144,9 +142,9 @@ Since it would be boring if you cannot write, it is possible to post and change 
 **However,** NostrP2P is originally intended to post by communicating with your own server, and using the demo server is an exceptional operation.
 If you want to have your own account, you need to set up your own server, connect it to the demo server (which also serves as an overlay NW bootstrap server), and perform operations such as posting through your own server.
 
-# Access NostrP2P with your own account
+## Access NostrP2P with your own account
 
-## Step 1: Set up your own server
+### Step 1: Set up your own server
 - Please refer to the Examples-Server Launch section in the [NostrP2P GitHub repository](https://github.com/ryogrid/nostrp2p) for how to set up the server.
   - There is an option **-b** among the command line options, specify **ryogrid.net:8888** for the demo server.
 - Built binaries of the server are placed at the following.
@@ -156,7 +154,7 @@ If you want to have your own account, you need to set up your own server, connec
   - The key starting with nsec is the private key, and you should manage it so that others do not know it. If someone else knows it, they can post on your behalf on NostrP2P
     - The private key for the Trial account in the demo is public for demonstration purposes, which is a special case
 
-## Step 2: Accessing Your Server from a Client
+### Step 2: Accessing Your Server from a Client
 - The method slightly varies depending on the client type
   - The port number to access will be the one specified with the **- l** option when starting the server plus 1
     - For example, if the **-l** option is omitted, it defaults to 127.0.0.1:20000, so the port number for the client will be 20001
@@ -165,7 +163,7 @@ If you want to have your own account, you need to set up your own server, connec
     - However, NostrP2P servers can handle TLS communication by placing fullchain.pem (certificate public key) and privkey.pem (private key) with the same names in the current directory at server startup and adding the option '-s true'
     - Use this if you do not use reverse proxies that enable TLS communication
 
-### Using the Web Client ( https://nostrp2p.vercel.app )
+#### Using the Web Client ( https://nostrp2p.vercel.app )
 - Due to security restrictions of web browsers, communication will be blocked if the server's REST I/F is not encrypted (not over TLS)
 - Therefore, you need to enable over TLS, meaning you need to turn the REST I/F open over HTTP into HTTPS
 - There are other methods, but one way to do this easily in a private network is by using the reverse proxy feature of Tailscale (a free VPN setup tool/service)
@@ -174,11 +172,11 @@ If you want to have your own account, you need to set up your own server, connec
   - To simplify, introduce Tailscale and refer to the above article while mapping access to "/" to "http://127.0.0.0:<mentioned port number>/", then set the server address in the client to the address assigned by Tailscale, "something.number.ts.net"
   - The URL will be like this -> https://something.number.ts.net/
 
-### Using Native Clients
+#### Using Native Clients
 - When using the various native clients available, the REST I/F of the personal server can remain as HTTP
   - https://github.com/ryogrid/flustr-for-nosp2p/releases/tag/latest
 
-# Challenges in Design and Development
+## Challenges in Design and Development
 - Struggled with design decisions
   - Making replies visible only to participants, and favorites known only to recipients, to reduce inter-server communication, took time to decide
 - Client implementation was challenging
@@ -191,7 +189,7 @@ If you want to have your own account, you need to set up your own server, connec
     - For example, the HTTP2 library does not support web builds, so HTTP2 adoption was postponed
     - Flutter Web's stability is still lacking, requiring workaround solutions
 
-# Remaining Issues
+## Remaining Issues
 - The GitHub repository for the mesh library suggests scaling up to about 100 nodes, but it may not be usable for larger scales
   - Although it performs relatively intelligent routing, it might struggle with routing decisions and updating node information with more nodes
   - If 100 nodes is the limit, a custom communication foundation might be necessary
