@@ -1,3 +1,8 @@
+---
+layout: default
+title: NostrP2P: Pure P2P Distributed Microblogging System 
+---
+
 Hello. This is ryo_grid.
 
 This time, I created a pure P2P distributed microblogging system called NostrP2P, and I will write about it.
