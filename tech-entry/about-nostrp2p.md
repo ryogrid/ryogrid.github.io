@@ -22,7 +22,7 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
 - From the above idea, I wondered if I could roughly implement a NAT traversal overlay with a gossip protocol, etc.
   - => I found [weaveworks/mesh](https://github.com/weaveworks/mesh), which is not only that but an even more intelligent implementation
 - mesh is very well made, but it could not establish reliable connection-based communication between nodes. Additionally, it had some quirks in usage, and it felt like I had to go through a lot of trial and error to use it
-  - => I wrote [ryogrid/gossip-overlay](https://github.com/ryogrid/gossip-overlay), which is something like a wrapper library for mesh that constructs a reliable communication channel on the overlay NW created by mesh using the SCTP protocol
+  - => I developed [ryogrid/gossip-overlay](https://github.com/ryogrid/gossip-overlay), which is something like a wrapper library for mesh that constructs a reliable communication channel on the overlay NW created by mesh using the SCTP protocol
 - Around the time I started messing with mesh, I learned about the Nostr protocol, which is used for implementations of distributed SNS (microblogs)
 - Additionally, with the various things about Twitter becoming X, I also looked into other distributed SNS
 - As a result, I thought the following:
@@ -47,7 +47,7 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
 - Each server operates on the overlay network
   - NAT traversal is achieved through relays by servers with global IPs
 - Uses the concepts and data structures of the [Nostr](https://github.com/nostr-protocol/nips) protocol as its foundation
-  - Utilizes public key-based data signatures for authentication, designs various messages for microblogging applications, and structures message data accordingly
+  - Utilizes public key-based data signatures for authentication, designs various messages for microblogging applications, and structures message data
   - However, due to the different underlying architecture, it is not compatible as a result of optimization
 - Each user sets up their own server. Clients primarily communicate only with their own server
 - To keep the communication volume low, it serializes data into a binary format where necessary, especially for parts with high traffic, and optimizes for the application and architecture
@@ -69,7 +69,7 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
   - (Unfortunately, there are no library implementations for connecting to the overlay network formed by mesh in languages other than Go. There are no other options either)
   - In mesh, each node has a 64-bit ID
   - Each node knows the IDs of all nodes participating in the overlay network
-    - There is a delay in updating, but it should be within 2-3 seconds for up to 100 nodes
+    - There is a delay in updating, but it should be within 2-3 seconds for up to 100 nodes I think
     - By using the lower 64 bits of the public key as the node (server) ID, there is no need to look up the node ID corresponding to the user
 - Private keys
   - Only the client needs to have it
@@ -89,18 +89,18 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
     - Responses to data requests are returned from the server in serialized binary with MessagePack
     - Lower communication frequency with the server allows mobile devices to rest the antenna for mobile networks, reducing power consumption, and for the server, sending a certain number of data together increases the effect of gzip compression at the HTTP layer, so the current implementation sends a request to the server every 10 seconds, and the server sends the data received from other servers after the previous request together
   - As mentioned above, when adding or updating information related to the user, such as posting from the client, a signature is attached
-  - Conversely, in the design of NostrP2P, the user's own server is a trusted entity, so the client does not verify the signatures of received data. Therefore, the server can send the signature information empty to reduce communication volume
+  - Conversely, in the design of NostrP2P, the user's own server can be trusted, so the client does not verify the signatures of received data. Therefore, the server can send the signature information empty to reduce communication volume
 
 ## Supported features
 - Posting
   - Currently, to keep the implementation simple, broadcast to all users on the overlay NW
-    - Honestly, if the number of users reaches the order of hundreds, this design will have its limits
+    - Honestly, if the number of users reaches the order of hundreds, this design may have its limits
     - In this case, it would be necessary to manage follower information and modify it to switch to multicast instead of broadcast. Also, by forwarding in a tree structure, it may be necessary to prevent the number of servers each server directly sends to from increasing
 - Profile
   - Broadcast when updated
   - If there is no profile information (including user icon and username) to display along with the post when the client tries to display it, it will send a request to its own server. If its own server cannot respond, it will send a request to the corresponding user's server. If the server is offline, it will resend the request later
 - Follow
-  - Currently, the only way to follow a user found in the global timeline
+  - Currently, the only way to follow a user is finding and following the user in the global timeline
     - (If the client is elaborated, it is possible to provide a UI to follow a user with a specified public key)
 - Reply (mention)
   - Can be done to anyone if the post is visible, but the interaction is only visible to the parties involved
@@ -121,7 +121,7 @@ If it works, it should display as shown below.
 
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/9fce752c-3d73-fa48-10ea-0770330a3b38.png)
 
-### Web client
+### Web Client
 - [https://nostrp2p.vercel.app/](https://nostrp2p.vercel.app/)
   - Made with Flutter
   - Recommended to access with Chrome on PC, smartphone, or tablet
@@ -129,13 +129,13 @@ If it works, it should display as shown below.
 ### Client settings
 Click/touch the gear mark at the top right of the screen and perform the following on the displayed screen.
 
-- ① Set the following for the Trial account as the private key
+- 1. Set the following for the Trial account as the private key
   - nsec1uvktv4u3csltg98caqzux3u0kawxz3mppxjqw40lcytqt52kdslshwr2xp
-- ② Set the server address
+- 2. Set the server address
   - Enter the following address of the demo server
   - https://ryogrid.net:8889
 
-**Note: It seems that the save button may not save well. If the input content is not displayed above the input area with the display of current server address, the setting has not been reflected, so if it is not displayed, try pressing it several times.**
+**Note: It seems that the save button may not save input content well. If the input content is not displayed above the input area with the display of current server address, the setting has not been reflected, so if it is not displayed, try pressing it several times.**
 
 Since it would be boring if you cannot write, it is possible to post and change profiles only with the Trial account.
 
