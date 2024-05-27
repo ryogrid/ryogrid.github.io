@@ -14,7 +14,7 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
 
 ## Prerequisite Knowledge
 - A rough understanding of the [Nostr](https://github.com/nostr-protocol/nips) protocol
-  - You can refer to [this article](https://zenn.dev/mattn/articles/cf43423178d65c) for sufficient understanding
+  - You can refer to [wikipedia page](https://en.wikipedia.org/wiki/Nostr) and [this page](https://nostr.how/en/the-protocol) for sufficient understanding
 
 ## Background of Development
 - Originally, I wanted to create a pure P2P application that works on an overlay that traverses NAT
