@@ -167,10 +167,9 @@ If you want to have your own account, you need to set up your own server, connec
 - Due to security restrictions of web browsers, communication will be blocked if the server's REST I/F is not encrypted (not over TLS)
 - Therefore, you need to enable over TLS, meaning you need to turn the REST I/F open over HTTP into HTTPS
 - There are other methods, but one way to do this easily in a private network is by using the reverse proxy feature of Tailscale (a free VPN setup tool/service)
-  - ["Making VPN-targeted Web Apps HTTPS-compatible with Tailscale's Built-in Reverse Proxy - DevelopersIO"](https://dev.classmethod.jp/articles/use-tailscale-builtin-reverse-proxy/)
+  - [tailscale serve command - Tailscale Docs](https://dev.classmethod.jp/articles/use-tailscale-builtin-reverse-proxy/](https://tailscale.com/kb/1242/tailscale-serve)
   - By using this, you can access your server from devices participating in the VPN using the demo client
-  - To simplify, introduce Tailscale and refer to the above article while mapping access to "/" to "http://127.0.0.0:<mentioned port number>/", then set the server address in the client to the address assigned by Tailscale, "something.number.ts.net"
-  - The URL will be like this -> https://something.taildXYZ.ts.net/
+  - To simplify, introduce Tailscale and refer to the above article while mapping access to "/" to "http://127.0.0.0: **mentioned port number** /" , then set the server address in the client to the URL assigned by Tailscale, "https://hoge.tailedXYZ.ts.net/"
 
 #### Using Native Clients
 - When using the various native clients available, the REST I/F of the personal server can remain as HTTP
