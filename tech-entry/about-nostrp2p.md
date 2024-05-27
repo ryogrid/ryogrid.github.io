@@ -1,208 +1,198 @@
-こんにちは。 ryo_grid です。  
+Hello. This is ryo_grid.
 
-今回はピュアP2P分散マイクロブログシステム NostrP2Pというものを作ってみたのでそれについて書いてみます。  
+This time, I created a pure P2P distributed microblogging system called NostrP2P, and I will write about it.
 
-- ひとまず開発物のGitHubリポジトリはこちら
+- For now, the GitHub repository of the development is here:
   - [ryogrid/nostrp2p](https://github.com/ryogrid/nostrp2p)
   - [ryogrid/flustr-for-nosp2p](https://github.com/ryogrid/flustr-for-nosp2p)
 
-アイキャッチ画像です。  
+Here is the eye-catching image.
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/9fce752c-3d73-fa48-10ea-0770330a3b38.png)
 
-# 前提知識
-- [Nostr](https://github.com/nostr-protocol/nips) プロトコルについてのざっくりとした理解
-  - [こちらの記事](https://zenn.dev/mattn/articles/cf43423178d65c)などに目を通しておいていただければ十分かと
+# Prerequisite Knowledge
+- A rough understanding of the [Nostr](https://github.com/nostr-protocol/nips) protocol
+  - You can refer to [this article](https://zenn.dev/mattn/articles/cf43423178d65c) for sufficient understanding
 
-# 開発しようと思った経緯
-- 元々NAT透過なオーバレイ上で動作するピュアP2Pなアプリケーションを作ってみたかった
-  - [DHTベースの分散KVS](https://qiita.com/ryo_grid/items/9a82d7230fbc4a0875c1)を作ったことがあったが、NATの壁を超えることはできなかった
-- 上の思いから、ひとまずgossipプロトコルなどで雑にNAT透過なオーバレイを実装できないか考えていた
-  - => そのものずばり、どころかよりインテリジェントな実装である[weaveworks/mesh](https://github.com/weaveworks/mesh) を見つけた 
-- meshは非常に良くできているが、ノード間で信頼性のあるコネクションベースの通信はできなかった。また、利用方法に少々クセがあり、トライアンドエラーを繰り返さないと使えない感じだった
-  - => SCTPプロトコルによる信頼性のある通信路をmeshで構築されたオーバレイNW上に張る、言ってみればmeshのラッパーライブラリ的なものである[ryogrid/gossip-overlay](https://github.com/ryogrid/gossip-overlay)を書いたりした
-- meshをいじり始めた頃、分散SNS（マイクロブログ）の実装等に利用されるNostrプロトコルというものを知った
-- ついでに、TwitterがXになるアレコレなどもあり、その他の分散SNSについても調べてみた
-- 結果、以下のようなことを思った
-  - サーバの運用者にかかる諸々の負荷が大きすぎていずれ破綻しないのだろうか？
-    - Misskey.io においては [このような状況であったりする](https://misskey.io/notes/9brqui38ib)
-    - 上は極端な例にしても、全体的にボランティア的なリソースに依存しており、少なくとも私にはあまり健全ではないように思えた
-- 以上のあれこれが入り混じり、また、タイミングがおおむね一致したことから掲題に挙げたNostrP2Pを作ってみることにした
-  - （ピュアP2Pでの分散マイクロブログの実装が、私が探した限り見つからなかったというのも一つの理由。もしご存じの方がいましたらコメント欄などで教えていただければ幸甚）
+# Background of Development
+- Originally, I wanted to create a pure P2P application that works on an overlay that traverses NAT
+  - I once created a [DHT-based distributed KVS](https://qiita.com/ryo_grid/items/9a82d7230fbc4a0875c1), but it could not traverse the NAT wall
+- From the above idea, I wondered if I could roughly implement a NAT traversal overlay with a gossip protocol, etc.
+  - => I found [weaveworks/mesh](https://github.com/weaveworks/mesh), which is not only that but an even more intelligent implementation
+- mesh is very well made, but it could not establish reliable connection-based communication between nodes. Additionally, it had some quirks in usage, and it felt like I had to go through a lot of trial and error to use it
+  - => I wrote [ryogrid/gossip-overlay](https://github.com/ryogrid/gossip-overlay), which is something like a wrapper library for mesh that constructs a reliable communication channel on the overlay NW created by mesh using the SCTP protocol
+- Around the time I started messing with mesh, I learned about the Nostr protocol, which is used for implementations of distributed SNS (microblogs)
+- Additionally, with the various things about Twitter becoming X, I also looked into other distributed SNS
+- As a result, I thought the following:
+  - Wouldn't the various burdens on server operators eventually break down?
+    - In Misskey.io, it was [in this state](https://misskey.io/notes/9brqui38ib)
+    - Although the above is an extreme example, overall it seemed to depend on volunteer resources, which, at least to me, did not seem very healthy
+- All the above mixed together, and since the timing coincided roughly, I decided to create the NostrP2P mentioned in the title
+  - (One reason was that I couldn't find an implementation of distributed microblogging with pure P2P as far as I searched. If anyone knows, I would be grateful if you could let me know in the comments section)
 
-# NostrP2Pのコンセプト
-- **利用者皆の貢献により構成されるシステム**
-  - 課題感: 既存の分散SNS（Mastdon、Nostr、Bluesky、etc..）の設計は、サーバの運用者にかかる金銭的・作業的負荷が高くシステム全体としてみた時の健全性に欠ける（ように感じられる）
+# Concept of NostrP2P
+- **A system composed of the contributions of all users**
+  - Issue: The design of existing distributed SNS (Mastodon, Nostr, Bluesky, etc.) places a high financial and operational burden on server operators, and when viewed as a system as a whole, it lacks soundness (as it seems to me)
 
-
-# NostrP2Pの特徴
-- gossipプロトコルによるブロードキャストを軸にしたシステム
-  - gossipプロトコルによるオーバレイネットワークの構成とその上での各種メッセージングが可能な [weaveworks/mesh](https://github.com/weaveworks/mesh) ライブラリを通信基盤とする
-- パフォーマンスやデータの一貫性より実装の容易さとシンプルさに重点を置く
-  - 結局のところは省工数にしたいという理由に落ちるかもしれないが、この手のシステムで複雑な仕組みを入れると安定して動くようにするのが大変
-  - 上の理由からDHTなどの構造化の仕組みは（ひとまず）採用していない
-- 全体的にファジーにやる（ex: メッセージのロストも少量であれば許容する）
-  - 他の分散SNSと比べてピュアP2Pというまともなパフォーマンスで動かすのが難しいアーキであるので、あまりリッチな機能は提供しない
-- 各サーバはオーバレイNW上で動作させる
-  - NATはグローバルIPを持つサーバによる中継で超える
-- [Nostr](https://github.com/nostr-protocol/nips) プロトコルの考え方とデータ構造を下敷きとしている
-  - 公開鍵とそれを用いたデータへの署名を認証基盤として利用する、マイクロブログのアプリケーションを実現するための各種メッセージの設計、メッセージのデータ構造、など
-  - ただし、前提とするアーキテクチャが異なるため、最適化の結果として互換性はないものとなっている
-- 各ユーザが自身のマシンにサーバを立てる。各ユーザが利用するクライアントは基本的に自身のサーバのみと通信する
-- Nostrプロトコルが汎用性とデータ可読性に重きを置いた結果、マイクロブログシステムで採用した場合に通信量が比較的大きなものとなったことを踏まえ、特に通信量が多くなる部分に絞ってバイナリフォーマットにシリアライズする。また、アプリケーションおよびアーキテクチャ特化の最適化で通信量を低く抑える
-- pullよりもpush（詳細後述）
-- クライアントは主にスマートフォンなどのモバイルデバイスで利用されることを前提とし、それらのデバイスで特に重要となる通信量や電力消費の観点での最適化を図る
-　
-
-　システム構成概念図  
+# Features of NostrP2P
+- A system centered around broadcast using the gossip protocol
+  - Uses the [weaveworks/mesh](https://github.com/weaveworks/mesh) library, which enables the construction of an overlay network and various types of messaging on it, as the communication infrastructure
+- Focuses more on ease of implementation and simplicity rather than performance and data consistency
+  - The rationale may ultimately be to reduce workload, but adding complex mechanisms in such systems makes it challenging to operate stably
+  - For the above reasons, structured mechanisms such as DHT are not adopted (for now)
+- Operates overall in a fuzzy manner (e.g., allows for minor message loss)
+  - Unlike other distributed SNSs, it operates on a pure P2P architecture that is challenging to achieve reasonable performance, so it does not offer many rich features
+- Each server operates on the overlay network
+  - NAT traversal is achieved through relays by servers with global IPs
+- Uses the concepts and data structures of the [Nostr](https://github.com/nostr-protocol/nips) protocol as its foundation
+  - Utilizes public key-based data signatures for authentication, designs various messages for microblogging applications, and structures message data accordingly
+  - However, due to the different underlying architecture, it is not compatible as a result of optimization
+- Each user sets up their own server. Clients primarily communicate only with their own server
+- To keep the communication volume low, it serializes data into a binary format where necessary, especially for parts with high traffic, and optimizes for the application and architecture
+- Emphasizes push over pull (details later)
+- Assumes clients are mainly used on mobile devices like smartphones, optimizing for communication volume and power consumption, which are particularly important on these devices
+  
+  System configuration concept diagram  
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/83fc6146-0e15-a363-ddac-d3d373c21c48.png)
 
-# 詳細（設計・実装）
-- 各ユーザが自身のマシンにサーバを立てる。クライアントでのアクセスは自身のサーバに対してのみ行う
-  - 自宅マシン（つまりグローバルIPを持たないマシン）に立てた場合、スマホ等のモバイルデバイスからモバイル回線で素直にはアクセスできないが、tailscale等でVPNを張ることで対処してもらう想定
-  - **ただし、パブリックIPで運用するサーバもいないとオーバレイできる系が成立しない**
-    - => パブリックIPで運用する場合の考慮としてクライアントから投稿等を行う際には署名をつけ、サーバはその検証を行う
-- pullよりもpush
-  - ブロードキャストして、followしてる者にだけ受け取ってもらい、他のものには捨ててもらう
-    - 原則、ブロードキャスト時に受け手はオンラインである想定
-- Go言語でmeshライブラリを利用する前提での設計
-  - (残念ながら、meshにより構成されるオーバレイNWに接続できるライブラリ実装はGo以外の言語にはない。が、他の選択肢も見当たらず)
-  - meshでは64bitのIDを各ノードが持っている
-  - 各ノードはオーバレイNWに参加している全ノードのIDを知っている
-    - 最新化まで遅延はあるが、100ノード程度までであれば、2-3秒の範囲に収まるのではないか・・・と思う
-    - 公開鍵の下位64bitをノード（サーバ）のIDとすることで、ユーザに対応するノードのIDを探索するといった処理を不要にできる
-- 秘密鍵
-  - クライアントだけが持っていれば良い
-  - サーバには公開鍵だけを設定しておく。その情報があれば、対応する秘密鍵を持っているユーザ以外からの投稿などは弾くことができ、ユーザは公開鍵と対応させてあるノードIDによって識別可能なため、他のサーバがメッセージをユニキャストすることもできる
-  - なお、秘密鍵・公開鍵はNostrのものがそのまま利用できる
-- あまり長期間のデータは蓄積しない
-  - （プロフィール情報などを除き）古いデータを参照する機会は特殊なクライアントでない限り少ないので、潔く割り切る
-  - これにより、サーバのメモリ使用量やストレージ使用量が低く抑えられる。また、データが多くならないということはサーバが要求されたデータを探す際の処理負荷なども低く抑えられる
-- サーバ間通信はバイナリで行うがやりとりするデータの構造はNostrプロトコルと同一
-  - バイナリフォーマットにはMessagePackを採用。ProtoBufも試したが手間の割にデータサイズの変化が小さかったため不採用とした
-  - サーバを立てる時の面倒が増えるので、通信を over TLSで行うといったことはしない
-    - meshはアプリケーションで共通に設定したパスワードから共通鍵を生成し暗号化を行えるようだが、パフォーマンス低下の懸念やOSSとの相性の悪さから当該機能は利用しない
-    - もしやるにしても、E2EEを別途行うといったことになろうが、ブロードキャストと相性が悪いという課題がある・・・
-- クライアント
-  - 自身のサーバとREST I/Fで通信
-    - 基本のデータ形式はJSONテキスト
-    - データ要求へのレスポンスのみMessagePackでシリアライズしたバイナリでサーバから返ってくる
-    - サーバとの通信頻度が低い方がモバイルデバイスではモバイル回線用のアンテナを休ませることができ電力消費を抑えられ、また、サーバ側としては、ある程度の数をまとめて送った方がHTTPレイヤでのgzip圧縮の効果が高まるため、現在の実装では10秒に一回サーバへリクエストを送り、それに対し、サーバは前回のリクエスト以降に他のサーバから受信したデータをまとめて送るようになっている
-  - 前述の通り、クライアントから投稿を行う際などユーザに紐づく情報の追加・更新時には署名をつける
-  - 逆に、NostrP2Pの設計では、自分用サーバは信頼できる存在であるため、クライアントは受信したデータの署名検証は行わない。従って、サーバは通信量削減のため署名情報の部分は空にして送信できる
+# Details (Design and Implementation)
+- Each user sets up their own server, and client access is limited to their own server
+  - If the server is set up on a home machine (i.e., a machine without a global IP), direct access from mobile devices over mobile networks is not possible, but it can be handled by setting up a VPN with tools like Tailscale
+  - **However, without servers operating with public IPs, the overlay system cannot function**
+    - => For servers operating with public IPs, posts from clients must be signed, and the server verifies the signature
+- Emphasizes push over pull
+  - Broadcast and have it received only by followers, discarding for others
+    - The assumption is that recipients are online during broadcasts
+- Designed based on the premise of using the mesh library in Go language
+  - (Unfortunately, there are no library implementations for connecting to the overlay network formed by mesh in languages other than Go. There are no other options either)
+  - In mesh, each node has a 64-bit ID
+  - Each node knows the IDs of all nodes participating in the overlay network
+    - There is a delay in updating, but it should be within 2-3 seconds for up to 100 nodes
+    - By using the lower 64 bits of the public key as the node (server) ID, there is no need to look up the node ID corresponding to the user
+- Private keys
+  - Only the client needs to have it
+  - The server only needs the public key. With this information, it can reject posts from anyone other than the user who has the corresponding private key, and users can be identified by the node ID associated with the public key, allowing other servers to unicast messages
+  - The private and public keys of Nostr can be used as they are
+- Do not accumulate long-term data
+  - (Except for profile information, etc.) There are few opportunities to refer to old data unless it is a special client, so we cut it off boldly
+  - This keeps the server's memory usage and storage usage low. Also, having less data means that the server's processing load when searching for requested data is kept low
+- Communication between servers is done in binary, but the structure of the data exchanged is the same as the Nostr protocol
+  - MessagePack is used for the binary format. ProtoBuf was also tried, but it was not adopted because the change in data size was small compared to the effort required
+  - We do not use over TLS for communication as it increases the hassle of setting up servers
+    - It seems that mesh can encrypt using a common key generated from a commonly set password in the application, but due to concerns about performance degradation and incompatibility with OSS, this feature is not used
+    - Even if we do, it would be done separately with E2EE, but there is a challenge that it is not compatible with broadcasting...
+- Client
+  - Communicates with its own server via REST I/F
+    - The basic data format is JSON text
+    - Responses to data requests are returned from the server in serialized binary with MessagePack
+    - Lower communication frequency with the server allows mobile devices to rest the antenna for mobile networks, reducing power consumption, and for the server, sending a certain number of data together increases the effect of gzip compression at the HTTP layer, so the current implementation sends a request to the server every 10 seconds, and the server sends the data received from other servers after the previous request together
+  - As mentioned above, when adding or updating information related to the user, such as posting from the client, a signature is attached
+  - Conversely, in the design of NostrP2P, the user's own server is a trusted entity, so the client does not verify the signatures of received data. Therefore, the server can send the signature information empty to reduce communication volume
 
-# サポートする機能
-- 投稿（ポスト）
-  - 現状、実装をシンプルなものとするために、オーバレイNW上にいる全ユーザにブロードキャストする
-    - （正直なところ、万が一ユーザが数百のオーダーなどに達した場合、この設計では限界があるとは思う） 
-    - （この場合、フォロワーの情報を管理するようにし、ブロードキャストではなくマルチキャストに切り替えるような修正が必要と思われる。また、木構造を成す形で転送するなどして、各サーバが直接に送信するサーバの数が増えないようにする必要があるかもしれない）
-- プロフィール
-  - 更新したらブロードキャスト
-  - クライアントがポストを表示しようとした際に、併せて表示すべきプロフィール情報（ユーザアイコンやユーザ名が含まれる）が無い場合自分用サーバに取得リクエストを行い、自分用サーバは要求の応えられなかった場合、対応するユーザのサーバに取得要求を送る。サーバがオフラインであった場合は後ほど取得要求を再送する
-- フォロー
-  - 現状、グローバルなタイムラインで見つけたユーザをフォローするという形しかない
-    - （クライアントを作りこめば指定した公開鍵を持つユーザをフォローする、といったUIは提供可能）
-- リプライ（メンション）
-  - 投稿が見えていれば誰にでも行えるが、そのやり取りは当事者間だけにしか見えない
-- ファボ（Like）
-  - post元のユーザのサーバにユニキャストする
-    - 送信時に相手サーバがオフラインであった場合は後ほど再送する
-  - ファボした者は対象の投稿にファボしたことのみ分かり総数は分からない。された者は総数が分かる
-  - それ以外のユーザはファボの状況に関して何の情報も知り得ない
-- リポスト・引用リポスト
-  - リプライの場合と異なり、全ユーザにブロードキャストする
-  - 引用リポストでリポストしたポストをクライアントが未受信の場合はサーバにリクエストし、自分用サーバは要求されたポストを持っていなければ、それをポストしたユーザのサーバに取得要求を送る。サーバがオフラインであった場合は後ほど取得要求を再送する
-- ハッシュタグ
-  - サーバでのポストの探索処理の負荷増大、NW全体への問い合わせの発生を要するのでサポートしない
+# Supported features
+- Posting
+  - Currently, to keep the implementation simple, broadcast to all users on the overlay NW
+    - Honestly, if the number of users reaches the order of hundreds, this design will have its limits
+    - In this case, it would be necessary to manage follower information and modify it to switch to multicast instead of broadcast. Also, by forwarding in a tree structure, it may be necessary to prevent the number of servers each server directly sends to from increasing
+- Profile
+  - Broadcast when updated
+  - If there is no profile information (including user icon and username) to display along with the post when the client tries to display it, it will send a request to its own server. If its own server cannot respond, it will send a request to the corresponding user's server. If the server is offline, it will resend the request later
+- Follow
+  - Currently, the only way to follow a user found in the global timeline
+    - (If the client is elaborated, it is possible to provide a UI to follow a user with a specified public key)
+- Reply (mention)
+  - Can be done to anyone if the post is visible, but the interaction is only visible to the parties involved
+- Like (Favorite)
+  - Unicast to the user's server who posted it
+    - If the recipient's server is offline when sending, it will resend later
+  - The liker can only see that they liked the post and not the total number. The liked user can see the total number
+  - Other users cannot know any information about the like situation
+- Repost & Quote Repost
+  - Unlike replies, broadcast to all users
+  - If the client has not received the post that was quoted repost, it will request it from the server. If the user's own server does not have the requested post, it will send a request to the server of the user who posted it. If the server is offline, it will resend the request later
+- Hashtags
+  - Not supported as it would increase the load of post search processing on the server and generate queries to the entire NW
 
-# デモ
-Webクライアントでデモサーバに接続してみます。  
-動くと下のような表示がされるはずです。  
+# Demo
+Try connecting to the demo server with the web client.
+If it works, it should display as shown below.
 
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/9fce752c-3d73-fa48-10ea-0770330a3b38.png)
 
+## Web client
+- [https://nostrp2p.vercel.app/](https://nostrp2p.vercel.app/)
+  - Made with Flutter
+  - Recommended to access with Chrome on PC, smartphone, or tablet
 
-## Webクライアント
-- [https://nostrp2p.vercel.app/](https://nostrp2p.vercel.app/)  
-  - Flutter製
-  - PC、スマホ、タブレットいずれのプラットフォームでもChromeでのアクセスを推奨
+## Client settings
+Click/touch the gear mark at the top right of the screen and perform the following on the displayed screen.
 
-## クライアントの設定
-画面右上の歯車マークをクリック・タッチして表示される画面で以下を行います。  
-
-
-- ①秘密鍵としてTrialアカウント用の以下を設定
+- ① Set the following for the Trial account as the private key
   - nsec1uvktv4u3csltg98caqzux3u0kawxz3mppxjqw40lcytqt52kdslshwr2xp
-- ②サーバのアドレスを設定
-  - デモサーバである以下のアドレスを入力します
+- ② Set the server address
+  - Enter the following address of the demo server
   - https://ryogrid.net:8889
 
-**注: saveボタンを押してもうまく保存されない場合があるようです。入力エリアの上に current server address という表示とともに入力内容が表示されていないと設定が反映されていない状態なので、表示されない場合は何度か押してみてください。**  
-　
-書き込みもできないとつまらないかと思いますので、Trialアカウントでのみになりますが、投稿やプロフィールの変更なども可能としてあります。
+**Note: It seems that the save button may not save well. If the input content is not displayed above the input area with the display of current server address, the setting has not been reflected, so if it is not displayed, try pressing it several times.**
 
-**ですが、** NostrP2Pでは、投稿は本来自分用のサーバと通信して行う想定のシステムでありデモサーバを介して行うというのは例外的な運用となっています。
-　
-自身のアカウントを持ちたいと考えた場合、自分用のサーバを立て、そのサーバをデモサーバ（実はオーバレイNWのブートストラップサーバも兼ねています）に接続し、自身で立てたサーバ経由で投稿等の操作を行う必要があります。
+Since it would be boring if you cannot write, it is possible to post and change profiles only with the Trial account.
 
-# NostrP2Pに自身のアカウントでアクセスする
+**However,** NostrP2P is originally intended to post by communicating with your own server, and using the demo server is an exceptional operation.
+If you want to have your own account, you need to set up your own server, connect it to the demo server (which also serves as an overlay NW bootstrap server), and perform operations such as posting through your own server.
 
-## ステップ1: 自分用サーバを立てる
-- サーバの立て方は[NostrP2PのGitHubリポジトリ](https://github.com/ryogrid/nostrp2p)にあるExamples-Server Launchのところをご参照下さい。  
-  - コマンドラインオプションの中に **-b** というオプションがありますが、そこはデモサーバの **ryogrid.net:8888**を指定すればOKです。  
-- サーバのバイナリは以下にビルド済みのものを置いてあります。  
+# Access NostrP2P with your own account
+
+## Step 1: Set up your own server
+- Please refer to the Examples-Server Launch section in the [NostrP2P GitHub repository](https://github.com/ryogrid/nostrp2p) for how to set up the server.
+  - There is an option **-b** among the command line options, specify **ryogrid.net:8888** for the demo server.
+- Built binaries of the server are placed at the following.
   - [https://github.com/ryogrid/nostrp2p/releases/tag/latest](https://github.com/ryogrid/nostrp2p/releases/tag/latest)
-  - 動作させたいプラットフォーム用のバイナリが無い場合は、お手数ですが自前でのビルドをお願いします 〇刀乙
-- なお、秘密鍵と公開鍵はトライアルアカウント用のものとは別のものを使うことになります
-- 鍵ペアは以下で生成できます
-  - $ .¥nostrp2p_server.exe genkey
-    - Windowsの場合
-  - nsecから始まる鍵が秘密鍵ですが、それは他人に知られることのないよう管理して下さい。それを他人に知られた場合、NostrP2Pの上で自身になりすました投稿などを他人が行うことが可能となってしまいます
-    - デモにおけるTrialアカウントの秘密鍵は公開していますが、それはデモのためのアカウントであるための特殊な例だと考えて下さい
+  - If there is no binary for the platform you want to run, please build it yourself
+- Note that the private key and public key will be different from those for the trial account.
+  - The key starting with nsec is the private key, and you should manage it so that others do not know it. If someone else knows it, they can post on your behalf on NostrP2P
+    - The private key for the Trial account in the demo is public for demonstration purposes, which is a special case
 
-## ステップ2: 自分用サーバにクライアントからアクセスする
-- 利用するクライアント種別によって少し方法が変わります
-  - なお、アクセスするポート番号はいずれでもサーバの起動時に **- l** オプションで指定したもの + 1です
-    - 例えば、**-l** オプションは省略可能ですが、その場合は 127.0.0.1:20000 を指定したものと見なされるので、クライアントで指定する際のポート番号は20001になります
-- 次のセクションは、サーバがグローバルIPアドレスを持つマシンではなく、プライベートネットワーク内に立てられた前提での記述です
-  - グローバルIPアドレスを持ち、インターネットからアクセス可能な形で立てた方はover TLS化の説明等は不要でしょう^^
-    - と、言いたいところですが、NostrP2Pのサーバは自身でTLS通信をさばけまして、fullchain.pem (証明書公開鍵) と privkey.pem （秘密鍵） をサーバ起動時のカレントディレクトリに同名で配置し、サーバ起動時のオプションに '-s true' を加えることで行えます
-    - over TLS化できるリバースプロキシなどを用いない場合はこちらをご利用下さい
+## Step 2: Accessing Your Server from a Client
+- The method slightly varies depending on the client type
+  - The port number to access will be the one specified with the **- l** option when starting the server plus 1
+    - For example, if the **-l** option is omitted, it defaults to 127.0.0.1:20000, so the port number for the client will be 20001
+- The following section assumes the server is set up within a private network, not on a machine with a global IP address
+  - Those who set it up with a global IP address accessible from the internet may not need explanations on TLS
+    - However, NostrP2P servers can handle TLS communication by placing fullchain.pem (certificate public key) and privkey.pem (private key) with the same names in the current directory at server startup and adding the option '-s true'
+    - Use this if you do not use reverse proxies that enable TLS communication
 
-### Webクライアント（ https://nostrp2p.vercel.app ）を使う
-- Webブラウザのセキュリティの制限から、サーバ側のREST I/F が暗号化対応していない（over TLSでない）場合、通信がブロックされて、動作しません
-- 従って、over TLS化、言い換えれば元はHTTPで開いているREST I/Fの口をHTTPS化する必要があります
-- 他にも方法はあると思いますが、ひとまずこれをプライベートネットワークでも簡単に行う方法の1つとしてtailscale（無料VPN構築ツール・サービス）のリバースプロキシ機能というものを使う方法があります
-  - ["Tailscale 組み込みのリバースプロキシでVPN向けWebアプリをHTTPS対応する - DevelopersIO"](https://dev.classmethod.jp/articles/use-tailscale-builtin-reverse-proxy/)
-  - これを利用することでサーバを立てたマシンや、VPNに参加している端末からデモクライアントを利用して自分用サーバにアクセス可能になります
-  - 細かい話をすっとばすと、tailscaleを導入して上の紹介記事を参照しつつ "/" へのアクセスを "http://127.0.0.0:<上述のポート番号>/" にマッピングして、tailscaleのDNSがサーバを立てたマシンに割り振った "うんたら.tailed数字.ts.net" というアドレスをサーバアドレスとしてクライアントに設定すればOKです
-  - URLはこうなります -> https://うんたら.tailed数字.ts.net/
-  
-### ネイティブクライアントを使う
-- 以下に置いてある各種ネイティブクライアントを用いる場合は自分用サーバのREST I/Fの口はHTTPのままでいけます 
+### Using the Web Client ( https://nostrp2p.vercel.app )
+- Due to security restrictions of web browsers, communication will be blocked if the server's REST I/F is not encrypted (not over TLS)
+- Therefore, you need to enable over TLS, meaning you need to turn the REST I/F open over HTTP into HTTPS
+- There are other methods, but one way to do this easily in a private network is by using the reverse proxy feature of Tailscale (a free VPN setup tool/service)
+  - ["Making VPN-targeted Web Apps HTTPS-compatible with Tailscale's Built-in Reverse Proxy - DevelopersIO"](https://dev.classmethod.jp/articles/use-tailscale-builtin-reverse-proxy/)
+  - By using this, you can access your server from devices participating in the VPN using the demo client
+  - To simplify, introduce Tailscale and refer to the above article while mapping access to "/" to "http://127.0.0.0:<mentioned port number>/", then set the server address in the client to the address assigned by Tailscale, "something.number.ts.net"
+  - The URL will be like this -> https://something.number.ts.net/
+
+### Using Native Clients
+- When using the various native clients available, the REST I/F of the personal server can remain as HTTP
   - https://github.com/ryogrid/flustr-for-nosp2p/releases/tag/latest
-  - (Webブラウザのような制限が無いので）
 
-# 設計・開発において苦労した点
-- 設計においてどう割り切るかの判断に苦労
-  - リプライは当事者たちにしか見えない、ファボは受けたものにしか分からない、というのはサーバ間の通信量を抑えるための仕様であるが、ユーザ目線で本当にそれでいいかの決めには少々時間がかかった
-- クライアントの実装が大変
-  - サーバよりもこちらに時間がかかった
-  - [uchijo/flustr](https://github.com/uchijo/flustr) というNostrプロトコルベースのマイクロブログクライアントが<del>パクる</del>参考にするのにちょうどよい程度のコード規模で存在したので、これをNostrP2P向けに改修し、エンハンスすることでクライアントを作成した
-    - uchijo氏の great work に感謝している
-    - Flustrが採用しているFlutterフレームワークは書いたことがあり、Webフロントエンド系のフレームワークがあまり好きでない私にとっては渡りに船であったが、使ったことのないriverpodが状態管理に採用されており、その理解に苦戦した
-  - dart/flutter向けのサードのライブラリはそれなりに充実しているが、Webビルド非対応のものが多かった
-    - (コードベースはiOS向けビルドも可能としてあるが、お布施を払わないといけないのと、いちいち審査を通さないといけないのを避けるため、iOS端末対応はWebアプリで済ませたい、という前提がある）
-    - 例えば、HTTP2のライブラリはWebビルド非対応であったので、HTTP2の採用を見送るといったことがあった
-    - Flutter Webの安定度がまだまだで、モバイルのブラウザだと素直には動いてくれず、バッドノウハウ的な方法でどうにかすることがしばしばあった
+# Challenges in Design and Development
+- Struggled with design decisions
+  - Making replies visible only to participants, and favorites known only to recipients, to reduce inter-server communication, took time to decide
+- Client implementation was challenging
+  - Took more time than server implementation
+  - Referenced the [uchijo/flustr](https://github.com/uchijo/flustr), a Nostr protocol-based microblog client, modifying and enhancing it for NostrP2P
+    - Grateful for uchijo's great work
+    - Familiar with the Flutter framework used in Flustr, it was a good fit as I am not fond of web frontend frameworks
+    - Struggled with understanding riverpod, used for state management
+  - Although there are many third-party libraries for Dart/Flutter, many do not support web builds
+    - For example, the HTTP2 library does not support web builds, so HTTP2 adoption was postponed
+    - Flutter Web's stability is still lacking, requiring workaround solutions
 
-# 残る課題
-- meshライブラリのGitHubリポジトリには100ノード程度まではスケールするだろう、といった記述があるが、逆に言えば、それ以上の規模では使い物にならない可能性がある
-  - meshライブラリはgossipプロトコルベースながら比較的インテリジェントなルーティングを行うが、それがある意味仇となり、ノード数が多くなった場合のルーティングの決定や、ノード情報（コードを読むとNW全体のトポロジ情報かそれに近いものを同期しているように見える）の更新までにかかる時間が大きくなりすぎるといったことではないかと推測しているが、現状定かではない
-  - 実際に100ノード程度が限界であった場合、通信基盤のところも自前で実装する必要が出てくるかもしれない
-- やっぱりpostを全ユーザにブロードキャストする設計は（サーバ数が増えた場合）無茶では？
-- 署名検証の仕組みがあるため、なりすましての情報発信は不可能だが、いやがらせで同一の公開鍵を指定してサーバが起動された場合、NW上に同一のIDを持つノードが存在する状態となり、本来届くべきサーバに届かないメッセージが出る可能性が高い（特にユニキャスト）
-- DOSアタック的にメッセージを大量送信された場合に、NW全体が機能不全に陥る可能性があるが、現状特にそのような攻撃に対する対処が実装されていない
-- 私などはVPSも契約していますし、自宅のデスクトップ機はずっと電源入れっぱなしなので、24時間サーバを起動しておく、といったことは難しくなかったりするわけですが、そういうアレな人はさておき、いまどきの方たちがプライベートで所有しているPCというと、ラップトップがせいぜいであったりして、そうだとすると、それを24時間動かせというのは無茶があるのではないか、と思ったり
-  - => 結局、利用するマシンリソースが何であれ、元々何らかサーバを運用しているといった人しか利用し得ないシステムなのではないか？ そうなると母集団が小さくなるので辛いな、などと思ったり
+# Remaining Issues
+- The GitHub repository for the mesh library suggests scaling up to about 100 nodes, but it may not be usable for larger scales
+  - Although it performs relatively intelligent routing, it might struggle with routing decisions and updating node information with more nodes
+  - If 100 nodes is the limit, a custom communication foundation might be necessary
+- Broadcasting posts to all users may be impractical with more servers
+- While signature verification prevents impersonation, multiple servers starting with the same public key can cause message delivery issues
+- The network could become dysfunctional if flooded with messages, and currently, there is no countermeasure against such attacks
+- Running a server 24/7 might be difficult for users who don't already operate a server, limiting the potential user base
 
 Enjoy!
