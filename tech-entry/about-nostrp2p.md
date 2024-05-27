@@ -9,7 +9,7 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
   - [ryogrid/nostrp2p](https://github.com/ryogrid/nostrp2p)
   - [ryogrid/flustr-for-nosp2p](https://github.com/ryogrid/flustr-for-nosp2p)
 
-Here is the eye-catching image.
+
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12325/9fce752c-3d73-fa48-10ea-0770330a3b38.png)
 
 ## Prerequisite Knowledge
@@ -26,7 +26,7 @@ Here is the eye-catching image.
 - Around the time I started messing with mesh, I learned about the Nostr protocol, which is used for implementations of distributed SNS (microblogs)
 - Additionally, with the various things about Twitter becoming X, I also looked into other distributed SNS
 - As a result, I thought the following:
-  - Wouldn't the various burdens on server operators eventually break down?
+  - Wouldn't the various burdens on server operators eventually make these bankrupt?
     - In Misskey.io, it was [in this state](https://misskey.io/notes/9brqui38ib)
     - Although the above is an extreme example, overall it seemed to depend on volunteer resources, which, at least to me, did not seem very healthy
 - All the above mixed together, and since the timing coincided roughly, I decided to create the NostrP2P mentioned in the title
