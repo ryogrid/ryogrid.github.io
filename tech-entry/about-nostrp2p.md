@@ -30,7 +30,7 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
     - In Misskey.io, it was [in this state (reffered post is wrote in Japanese :) )](https://misskey.io/notes/9brqui38ib)
     - Although the above is an extreme example, overall it seemed to depend on volunteer resources, which, at least to me, did not seem very healthy
 - All the above mixed together, and since the timing coincided roughly, I decided to create the NostrP2P mentioned in the title
-  - (One reason was that I couldn't find an implementation of distributed microblogging with pure P2P as far as I searched. If anyone knows, I would be grateful if you could let me know in the comments section)
+  - (One reason was that I couldn't find an implementation of distributed microblogging with pure P2P as far as I searched. If anyone knows, I would be grateful if you could let me know)
 
 ## Concept of NostrP2P
 - **A system composed of the contributions of all users**
