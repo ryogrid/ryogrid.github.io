@@ -1,4 +1,4 @@
-# **NostrP2P: Pure P2P Distributed Microblogging System**
+# **NostrP2P: A Pure P2P Distributed Microblogging System**
 
 
 Hello. This is ryo_grid.
