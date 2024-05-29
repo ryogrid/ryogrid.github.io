@@ -145,12 +145,12 @@ If you want to have your own account, you need to set up your own server, connec
 ## Access NostrP2P with your own account
 
 ### Step 1: Set up your own server
-- Please refer to the Examples-Server Launch section in the [NostrP2P GitHub repository](https://github.com/ryogrid/nostrp2p) for how to set up the server.
-  - There is an option **-b** among the command line options, specify **ryogrid.net:8888** for the demo server.
+- Please refer to the Examples-Server Launch section in the [NostrP2P GitHub repository](https://github.com/ryogrid/nostrp2p) for how to set up the server
+  - There is an option **-b** among the command line options, specify **ryogrid.net:8888** for the demo server
 - Built binaries of the server are placed at the following.
   - [https://github.com/ryogrid/nostrp2p/releases/tag/latest](https://github.com/ryogrid/nostrp2p/releases/tag/latest)
   - If there is no binary for the platform you want to run, please build it yourself
-- Note that the private key and public key will be different from those for the trial account.
+- Note that the private key and public key will be different from those for the trial account
   - The key starting with nsec is the private key, and you should manage it so that others do not know it. If someone else knows it, they can post on your behalf on NostrP2P
     - The private key for the Trial account in the demo is public for demonstration purposes, which is a special case
 
