@@ -183,7 +183,7 @@ If you want to have your own account, you need to set up your own server, connec
   - Referenced the [uchijo/flustr](https://github.com/uchijo/flustr), a Nostr protocol-based microblog client, modifying and enhancing it for NostrP2P
     - Grateful for uchijo's great work
     - Familiar with the Flutter framework used in Flustr, it was a good fit as I am not fond of web frontend frameworks
-    - Struggled with understanding riverpod, used for state management
+    - Struggled with understanding Riverpod library, used for state management
   - Although there are many third-party libraries for Dart/Flutter, many do not support web builds
     - For example, the HTTP2 library does not support web builds, so HTTP2 is not used
     - Flutter Web's stability is still lacking, I did some workaround solutions
