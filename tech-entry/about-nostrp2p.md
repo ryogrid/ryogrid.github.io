@@ -47,6 +47,10 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
 - Each server operates on the overlay network
   - NAT traversal is achieved through relays by servers with global IPs
 - Uses the concepts and data structures of the [Nostr](https://github.com/nostr-protocol/nips) protocol as its foundation
+  - Reason for adopting Nostr protocol as based design
+    - Nostr protocol is relatively easy to implement
+    - Ecosystem of Nostr protcol can be used
+    - It might be interesting to work with other systems or toools based on Nostr protocol
   - Utilizes public key-based data signatures for authentication, designs various messages for microblogging applications, and structures message data
   - However, due to the different underlying architecture, it is not compatible as a result of optimization
 - Each user sets up their own server. Clients primarily communicate only with their own server
@@ -114,6 +118,13 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
   - If the client has not received the post that was quoted repost, it will request it from the server. If the user's own server does not have the requested post, it will send a request to the server of the user who posted it. If the server is offline, it will resend the request later
 - Hashtags
   - Not supported as it would increase the load of post search processing on the server and generate queries to the entire NW
+- Deleting Posts
+  - Not implemented at this time
+  - As long as the current design, which broadcasts posts to all servers, does not face scalability issues, it is possible to implement a design where a deletion request is sent in the same manner, and the receiving server deletes the data
+    - However, if a server that has customized the author implemented one or an implementation developed by someone other than the author appears and ignores the deletion request, the post will not be deleted
+    - Data on servers that were not online when the request was sent will also not be deleted
+      - Even if the request is sent multiple times, if the timing is not right, it will not work, so in the extreme case, there is no guarantee that the data will be deleted
+  - Given that the servers are distributed and no one has the authority to enforce privileged operations, it is safest for users to assume that once a post is made, it cannot be deleted
 
 ## Demo
 Try connecting to the demo server with the web client.
