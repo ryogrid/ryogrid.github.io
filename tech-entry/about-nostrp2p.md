@@ -45,6 +45,7 @@ This time, I created a pure P2P distributed microblogging system called NostrP2P
 - Operates overall in a fuzzy manner (e.g., allows for minor message loss)
   - Unlike other distributed SNSs, it operates on a pure P2P architecture that is challenging to achieve reasonable performance, so it does not offer many rich features
 - Each server operates on the overlay network
+  - Server on private network separated with Internet by NAT can be join 
   - NAT traversal is achieved through relays by servers with global IPs
 - Uses the concepts and data structures of the [Nostr](https://github.com/nostr-protocol/nips) protocol as its foundation
   - Reason for adopting Nostr protocol as based design
@@ -210,5 +211,11 @@ If you want to have your own account, you need to set up your own server, connec
 - While signature verification prevents impersonation, multiple servers starting with the same public key can cause message delivery issues
 - The network could become dysfunctional if someone sends large amount of messages, and currently, there is no countermeasure against such attacks
 - Running a server 24/7 might be difficult for users who don't already operate a server, limiting the potential user base
-
-Enjoy!
+  - Using cheap Android smartphone as server machine may be a solution!
+    - [NostrP2P server on Android Smartphone](https://gist.github.com/ryogrid/a8c585a7d229a666ff82369df1939058#file-nostrp2p_on_termux-md)
+- Can you set up a server that is either outside the NAT or inside the NAT but accessible from outside the NAT?
+  - To allow communication between servers inside the NAT, a relay server like the one mentioned above is necessary
+  - Additionaly there's a concern that if there are no other bootstrap servers (servers like the one mentioned above that have their address published) besides the ones I have published, it could become a single point of failure.
+    - In case of a downtime or maintenance, it won't affect servers that are already connected, but new servers trying to join or servers trying to reconnect will face issues
+  
+**Enjoy!**
