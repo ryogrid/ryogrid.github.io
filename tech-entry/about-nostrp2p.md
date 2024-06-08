@@ -146,6 +146,7 @@ Click/touch the gear mark at the top right of the screen and perform the followi
 - 2) Set the server address
   - Enter the following address of the demo server
   - https://ryogrid.net:8889
+    - Don't place slash (/) at tail
 
 **Note: It seems that the save button may not save input content well. If the input content is not displayed above the input area with the display of current server address, the setting has not been reflected, so if it is not displayed, try pressing it several times.**
 
