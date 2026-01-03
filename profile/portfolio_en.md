@@ -1,7 +1,3 @@
-**[Japanese](https://ryogrid.github.io/profile/portfolio_ja.html)** / English
- 
-
-    
 back to [Profile](https://ryogrid.net/profile/index_en.html)
 
 - Table of Content
@@ -135,6 +131,68 @@ back to [Profile](https://ryogrid.net/profile/index_en.html)
     - [Video (Digest of TV broadcast)](http://www.youtube.com/watch?v=1ekbgyGrMLs)
 
 ### Developed software (private development and university research activities)
+
+#### [Development of create_pg_super_document, an AI-powered documentation generator for PostgreSQL codebase](https://github.com/ryogrid/create_pg_super_document) 2025-Present
+A project that generates documentation for all symbols in the PostgreSQL codebase, then utilizes these symbol documents to create high-quality documentation for functionalities, components, and other elements using AI agents.  
+　The project provides scripts for generating symbol documentation and includes the generated data in multiple formats (Markdown files, DuckDB database files, JSON files, CSV files, etc.). Symbol definition and reference indices are built from the PostgreSQL source tree using GNU GLOBAL (gtags), and the resulting data is imported and refined into DuckDB. The implementation language is Python.  
+　Documentation generation is orchestrated through a multi-agent approach using Claude Code, with specialized subagents handling architecture analysis, detailed documentation, and integration optimization. An MCP (Model Context Protocol) server provides programmatic access to PostgreSQL symbol information, enabling AI agents to retrieve source code, symbol overviews, and reference relationships.  
+　The generated documents include comprehensive technical guides, quick reference materials, and API documentation, with automatic cross-referencing and GitHub location links.
+
+- [GitHub repository](https://github.com/ryogrid/create_pg_super_document)
+- [Generated Documentation Site](https://ryogrid.github.io/create_pg_super_document/)
+
+#### [Development of camera-file-bin, a QR code-based file transfer PoC](https://github.com/ryogrid/camera-file-bin) 2025-Present
+A Proof of Concept (PoC) for transferring files by continuously displaying QR code images in a browser and capturing them with a smartphone camera for reconstruction.  
+　The application provides both sender and receiver functionality in a single Single Page Application (SPA), with tab switching to toggle between functions. Files are split into shards and displayed as QR codes at 5 FPS, with 40% redundancy allowing file reconstruction even if some frames are missed (recoverable with 60% of shards).  
+　The implementation uses React and TypeScript for the frontend, with qrcode.react for QR code generation and html5-qrcode for reading. Custom file splitting and redundancy logic ensures reliable transfer across the visual medium. Vite is used as the build tool.
+
+- [GitHub repository](https://github.com/ryogrid/camera-file-bin)
+
+#### [Development of gtags-mcp, an MCP server for GNU GLOBAL integration with AI coding agents](https://github.com/ryogrid/gtags-mcp) 2025-Present
+An MCP (Model Context Protocol) server that provides AI coding agents like Claude Code with powerful codebase analysis capabilities using GNU GLOBAL (gtags). The implementation language is JavaScript (Node.js).  
+　The server enables AI agents to search for symbol definitions, references, and perform pattern matching across large codebases with high performance. Key features include symbol definition lookup, reference finding, symbol completion with prefix matching, and pattern search using grep-like functionality. The gtags database is automatically updated periodically to keep results current.  
+　Built-in analysis prompts guide AI agents on effective usage, including systematic approaches for codebase exploration, function analysis, and refactoring impact analysis. The package is published on npm as @ryogrid/gtags-mcp and can be easily integrated with Claude Code or other MCP-compatible agents.
+
+- [GitHub repository](https://github.com/ryogrid/gtags-mcp)
+- [NPM Package](https://www.npmjs.com/package/@ryogrid/gtags-mcp)
+
+#### [Development of web-photo-frame, a modern web-based digital photo frame application](https://github.com/ryogrid/web-photo-frame) 2025-Present
+A modern web-based digital photo frame application built with React and Express. Features lazy loading, automatic thumbnail generation, memory-optimized image handling, and both slideshow and gallery viewing modes with automatic retry mechanisms for reliable performance.  
+　The frontend is implemented with React 18 and TypeScript using Vite, with Tailwind CSS and Radix UI components for modern, accessible design. The backend uses Express.js with Sharp for high-quality thumbnail generation and HTTP caching with ETags, Last-Modified, and Cache-Control headers.  
+　Performance optimizations include concurrent request control (maximum 10 simultaneous image requests), persistent thumbnail caching, automatic ObjectURL cleanup to prevent memory leaks, and HTTP/2 ready optimization. The application supports organizing images into sets with automatic metadata JSON caching.
+
+- [GitHub repository](https://github.com/ryogrid/web-photo-frame)
+
+#### [Development of tpcc_like_with_pgbench, a simplified TPC-C benchmark for PostgreSQL](https://github.com/ryogrid/tpcc_like_with_pgbench) 2025-Present
+A simplified version of the TPC-C benchmark using pgbench custom scripts for finding enhancement needed points of pgbench's custom script feature.  
+　The project includes schema and data loader scripts, benchmark transaction scripts (New Order, Payment, Delivery, Stock Level), and utilities to estimate tpmC. The implementation uses PLpgSQL for database logic and shell scripts for orchestration.  
+　A one-click script (run.sh) handles both initialization and benchmark execution, making it easy to run performance tests against PostgreSQL databases.
+
+- [GitHub repository](https://github.com/ryogrid/tpcc_like_with_pgbench)
+
+#### [Development of csv2graph-go-wasm, a WebAssembly scatter plot generator from CSV files](https://github.com/ryogrid/csv2graph-go-wasm) 2024-Present
+A web application that generates interactive scatter plots from CSV files using Go language and WebAssembly (WASM).  
+　The core drawing logic is implemented in Go with the fogleman/gg library for graph rendering, compiled to WebAssembly for browser execution. The frontend uses HTML, CSS, and vanilla JavaScript. Users can customize graph title, image size, data filtering by X-axis maximum value, data thinning (plot every N points), and X-axis value range mapping.  
+　The application supports both automatic X-axis generation from row numbers and manual X-axis from CSV's first column. Generated graphs can be downloaded as PNG files. A Rust/WASM version is also available in a separate branch.
+
+- [Demo](https://csv2graph-go-wasm.vercel.app)
+- [GitHub repository](https://github.com/ryogrid/csv2graph-go-wasm)
+
+#### [Development of anime-illust-image-searcher, an anime illustration image search application using ML techniques](https://github.com/ryogrid/anime-illust-image-searcher) 2024-Present
+An anime style illustration specific image search application using machine learning techniques including ViT (Vision Transformer) Tagger, BM25, and Doc2Vec.  
+　The search system works by generating latent semantic representation vectors using a ViT-based tagger (WD EVA02-Large Tagger v3) combined with Doc2Vec for embedding model training, and uses BM25 scoring in combination for search ranking. An internal re-ranking method is also implemented based on the assumption that users refine their queries based on search results.  
+　Additional features include character image feature-based reranking using a quantized CCIP (Contrastive anime Character Image Pre-training) model, tag weight specification in queries (including exclusion and required tag marking), incremental index updating, search result exporting for external viewer tools, and slideshow functionality.  
+　The implementation uses Python with PyTorch for tagging, Gensim for Doc2Vec, and StreamLit for the Web UI. Binary packages for Windows are available for use without a Python environment.
+
+- [GitHub repository](https://github.com/ryogrid/anime-illust-image-searcher)
+
+#### [Development of bltree-go-for-embedding, a B-link tree library for DBMS projects](https://github.com/ryogrid/bltree-go-for-embedding) 2024-Present
+A Go implementation of B-link tree container designed to be embedded in DBMS projects, forked from hmarui66/blink-tree-go.  
+　The fork is customized for embedding into other projects by integrating the B-link tree's buffer manager with external buffer managers. If you want to use the B-link tree in your DBMS project, you can integrate your buffer manager by implementing the ParentBufMgr and ParentPage interfaces, allowing your buffer manager to handle memory management while the B-link tree treats it as storage with persistence.  
+　Features include range scan support, configurable page sizes (specified in bits, e.g., 12 bits = 4096 bytes), and thread-safe operations. The library is used in the SamehadaDB project as the B-tree index implementation.
+
+- [GitHub repository](https://github.com/ryogrid/bltree-go-for-embedding)
+- [Usage Example in SamehadaDB](https://github.com/ryogrid/SamehadaDB/tree/master/lib/container/btree)
 
 #### [Development of NostrP2P, a pure P2P distributed microblogging system that allows machines inside NAT to participate](https://github.com/ryogrid/nostrp2p) 2024-Present
 The system design of existing distributed microblogs (SNS), which consists of a relatively small number of servers, forces server operators to bear the burden of money and operational work in the form of volunteers. Considering that this may become an issue for system continuity, we are considering a design that allows all users to operate the server relatively easily, and that works together as one microblog. I implemented it. The implementation languages ​​are Go language (server) and dart language (client).  
@@ -353,5 +411,3 @@ I wanted to use it in combination with WebRTC and tried to implement JS, but it 
 --- 
 
 [ryo.contact(at)gmail.com](mailto:ryo.contact(at)gmail.com) (please replace "(at)" with @).
-
-Copyright (c) Ryo KANBAYASHI
