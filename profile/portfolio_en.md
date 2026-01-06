@@ -222,8 +222,8 @@ I wanted to be able to build an overlay network that machines inside NAT can als
 After developing a distributed KVS, I became interested in the internal design and implementation of more widely used RDBs and decided to develop one myself.  
 　Since a zero-based implementation would be difficult, I am developing my own implementation based on [BusTub](<https://github.com/cmu-db/bustub>), which is available as an educational implementation in the open courseware lectures at Carnegie Mellon University (CMU). The original implementation is in C++.  
 　The original implementation was done in C++, but Go was chosen for the implementation because we wanted to implement it in a more modern language.  
-　The porting of C++ to Go was done to some extent by the project [go-bustub](<https://github.com/brunocalza/go-bustub>), so the code is directly based on that project.  
-　It was originally a private project, but because he felt he could not work alone, he recruited co-developers, and now two people including himself are working on the project.  
+　The porting of C++ to Go was done to some extent by the project [go-bustub](<https://github.com/brunocalza/go-bustub>), so the code is directly based on that project but these goals are different.  
+　SamehadaDB is aimed to be a RDBMS implementation for newbies of RDBMS development.  
 - [GitHub repository](https://github.com/ryogrid/SamehadaDB)
     
 #### [Rust implementation of FunnelKVS: a DHT-based distributed KVS](https://github.com/ryogrid/FunnelKVS/blob/master/ARCHITECTURE.md) 2020-present
@@ -237,7 +237,7 @@ Howerver, we were able to confirm that at least 20 nodes can scale the overall t
 　The development work was done during the time allowed for research and development at the Oly Research Institute, where I work.  
 - [GitHub repository](https://github.com/ryogrid/FunnelKVS)
 
-#### [Development of FX Trade Agents Learned by Deep Reinforcement Learning (DQN)](https://qiita.com/ryo_grid/items/1552d70eb2a8c15f6fd2) 2020
+#### [FX Trade Agents Learned by Deep Reinforcement Learning (DQN)](https://qiita.com/ryo_grid/items/1552d70eb2a8c15f6fd2) 2020
 　As an example of applying deep learning to time series data, we created a model of a deep reinforcement learning (DQN) trading agent and tried to simulate automated FX trading.  
 　As a result, we believe that we have developed a model (and its selection method) that may be of some practical use, but we have not yet verified the practicality of the model by using the agent we developed.  
 - [github repository](https://github.com/ryogrid/fx_systrade/tree/thesis-based-dqn-trade-ryogird-special-qiita-2006)
