@@ -226,7 +226,7 @@ After developing a distributed KVS, I became interested in the internal design a
 　SamehadaDB is aimed to be a RDBMS implementation for newbies of RDBMS development.  
 - [GitHub repository](https://github.com/ryogrid/SamehadaDB)
     
-#### [Rust implementation of FunnelKVS: a DHT-based distributed KVS](https://github.com/ryogrid/FunnelKVS/blob/master/ARCHITECTURE.md) 2020-present
+#### [FunnelKVS: a DHT-based distributed KVS in Rust](https://github.com/ryogrid/FunnelKVS/blob/master/ARCHITECTURE.md) 2020-present
 　A distributed KVS (access interface is REST) was implemented as a subject for Rust language learning.  
 　First, a simple simulator was developed in Python to verify whether the design (recognition) based on the Chord algorithm (protocol) adopted as the node lookup mechanism was correct before implementing the real system.  
 　The simulator was then ported to the Rust language.  
